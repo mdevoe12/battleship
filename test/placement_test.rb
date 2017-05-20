@@ -28,11 +28,25 @@ class PlacementTest < Minitest::Test
     assert_nil expected, actual
   end
 
-  def test_if_second_placement_works
+  def test_if_second_placement_nil_works
     placement = Placement.new
-    placement.second_placement
+    placement.second_placement("a0")
+    expected = nil
+    actual = placement.second_placement("a0")
 
+    assert_nil expected, actual
   end
+
+  def test_if_second_placement_index_check_works
+    placement = Placement.new
+    placement.first_placement("a1")
+    expected = "s2"
+    actual = placement.second_placement("b1")
+
+    assert_equal expected, actual
+  end
+
+
 
 
 
