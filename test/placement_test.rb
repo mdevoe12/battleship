@@ -49,7 +49,7 @@ class PlacementTest < Minitest::Test
   def test_if_find_previous_ship_works
     placement = Placement.new
     placement.first_placement("a1")
-    expected = "s1"
+    expected = "a1"
     actual = placement.find_previous_ship_placement
 
     assert_equal expected, actual

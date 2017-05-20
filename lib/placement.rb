@@ -32,10 +32,13 @@ class Placement
   end
 
   def find_previous_ship_placement
+
     place = ""
-    @board["a"].find do |index|
-      if index == "s1"
-        place = index
+    @board.each do |key, row|
+      row.find do |index|
+        if index == "s1"
+          place = key + row.index(index).to_s
+        end
       end
     end
     place
