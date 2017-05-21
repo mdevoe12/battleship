@@ -95,7 +95,6 @@ class PlacementTest < Minitest::Test
     placement.first_placement("b4")
     actual = placement.second_placement("a4")
     expected = "s2"
-    binding.pry
 
     assert_equal expected, actual
   end
@@ -107,6 +106,23 @@ class PlacementTest < Minitest::Test
     expected = nil
 
     assert_nil expected, actual
+  end
+
+  def test_if_b_first_placement_works
+    placement = Placement.new
+    actual = placement.b_first_placement("a1")
+    expected = "b1"
+
+    assert_equal expected, actual
+  end
+
+  def test_if_b_first_cant_write_to_occupied
+    placement = Placement.new
+    placement.first_placement("a1")
+    actual = placement.b_first_placement("a1")
+    expected = nil
+
+    assert_nil expected, actual 
   end
 
 
