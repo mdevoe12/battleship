@@ -34,10 +34,14 @@ class Placement
       #call back to choice of spot or redirect to selection screen
 
       #horizontal placement
-    elsif selection_two[0] == @previous_placement[0] && selection_two[1] > @previous_placement[1] || selection_two[1] < 
-
-      binding.pry
-      @board[selection_two[0]][selection_two[1].to_i] = "s2"
+    elsif selection_two[0] == @previous_placement[0]
+        if @previous_placement[1].to_i - selection_two[1].to_i != -1
+          puts "not a valid selection, please select again"
+        elsif @previous_placement[1].to_i - selection_two[1].to_i != 1
+          puts "not a valid selection, please select again"
+        else
+          @board[selection_two[0]][selection_two[1].to_i] = "s2"
+        end
     else selection_two[1] == @previous_placement[1] #vertical placement
       @board[selection_two[0]][selection_two[1].to_i] = "s2"
     end
