@@ -54,8 +54,9 @@ class Placement
 
   def b_first_placement(selection_three)
     if @board[selection_three[0]][selection_three[1].to_i] == ""
-
-      @board[selection_three[0]][selection_three[1].to_i] = "b1"
+      if north(selection_three) == true || west(selection_three) == true || south(selection_three) == true || east(selection_three) == true
+        @board[selection_three[0]][selection_three[1].to_i] = "b1"
+      end
     end
   end
 
@@ -110,8 +111,6 @@ class Placement
     end
    west
   end
-
-
 
 
   def previous_ship_placement
