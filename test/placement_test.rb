@@ -62,4 +62,13 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_if_expanded_horizontal_works
+    placement = Placement.new
+    placement.first_placement("a2")
+    expected = "s2"
+    actual = placement.second_placement("a4")
+
+    assert_equal expected, actual
+  end
+
 end
