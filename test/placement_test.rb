@@ -181,5 +181,24 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_if_west_returns_true
+    placement = Placement.new
+    placement.b_first_placement("c3")
+    actual = placement.west("c3")
+    expected = true
+
+    assert_equal expected, actual
+  end
+
+  def test_if_west_returns_false
+    placement = Placement.new
+    placement.first_placement("c1")
+    placement.b_first_placement("c3")
+    actual = placement.west("c3")
+    expected = false
+
+    assert_equal expected, actual
+  end
+
 
 end

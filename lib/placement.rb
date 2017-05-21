@@ -99,6 +99,18 @@ class Placement
    east
   end
 
+  def west(input)
+    potential_two = input[0] + (input[1].to_i - 1).to_s
+    potential_three = input[0] + (input[1].to_i - 2).to_s
+
+    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+      west = true
+    else
+      west = false
+    end
+   west
+  end
+
 
 
 
