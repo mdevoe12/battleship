@@ -54,8 +54,18 @@ class Placement
 
   def b_first_placement(selection_three)
     if @board[selection_three[0]][selection_three[1].to_i] == ""
+
       @board[selection_three[0]][selection_three[1].to_i] = "b1"
     end
+  end
+
+  def north(input)
+    potential_two = input[0].ord - 1
+    potential_two = potential_two.chr + input[1]
+    potential_three = input[0].ord - 2
+    potential_three = potential_three.chr + input[1]
+    binding.pry
+
 
   end
 
