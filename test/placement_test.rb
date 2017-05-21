@@ -58,17 +58,27 @@ class PlacementTest < Minitest::Test
     placement.first_placement("a1")
     expected = "s2"
     actual = placement.second_placement("a2")
-binding.pry
+
     assert_equal expected, actual
   end
 
   def test_if_positive_horiz_placement_works
     placement = Placement.new
     placement.first_placement("a2")
-    actual = placement.second_placement("a1")
     expected = "s2"
+    actual = placement.second_placement("a1")
 
     assert_equal expected, actual
+
+  end
+
+  def test_if_beyond_grid_works
+    placement = Placement.new
+    placement.first_placement("a4")
+    actual = placement.second_placement("a5")
+    expected = nil
+
+    assert_nil expected, actual
   end
 
 end
