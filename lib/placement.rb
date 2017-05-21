@@ -33,10 +33,7 @@ class Placement
       puts "not a valid selection, please select again"
     elsif selection_two[1].to_i > 4
       puts "not a valid selection please select again"
-      #call back to choice of spot or redirect to selection screen
-
-      #horizontal placement
-    elsif selection_two[0] == @previous_placement[0]
+    elsif selection_two[0] == @previous_placement[0] #horizontal  placement
         if @previous_placement[1].to_i - selection_two[1].to_i == -1
           @board[selection_two[0]][selection_two[1].to_i] = "s2"
         elsif @previous_placement[1].to_i - selection_two[1].to_i == 1
@@ -45,7 +42,14 @@ class Placement
           puts "not a valid selection, please select again"
         end
     else selection_two[1] == @previous_placement[1] #vertical placement
-      @board[selection_two[0]][selection_two[1].to_i] = "s2"
+      if @previous_placement[0].ord - selection_two[0].ord == -1
+        @board[selection_two[0]][selection_two[1].to_i] = "s2"
+      # elsif @previous_placement[0].ord - selection_two[0].ord == 1
+      else
+        puts "not a valid selection, please select again"
+
+      end
+      # @board[selection_two[0]][selection_two[1].to_i] = "s2"
     end
   end
 

@@ -81,4 +81,13 @@ class PlacementTest < Minitest::Test
     assert_nil expected, actual
   end
 
+  def test_if_negative_vert_placement_works
+    placement = Placement.new
+    placement.first_placement("b1")
+    actual = placement.second_placement("c1")
+    expected = "s2"
+    binding.pry
+    assert_equal expected, actual
+  end
+
 end
