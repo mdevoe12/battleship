@@ -30,6 +30,8 @@ class Placement
       puts "not a valid selection, please select again"
     elsif selection_two[1].to_i > 4
       puts "not a valid selection please select again"
+    elsif selection_two[0].ord > 100
+      puts "not a valid selection, choice off grid plese select again"
     elsif selection_two[0] == @previous_placement[0] #horizontal  placement
         if @previous_placement[1].to_i - selection_two[1].to_i == -1
           @board[selection_two[0]][selection_two[1].to_i] = "s2"
@@ -41,13 +43,11 @@ class Placement
     else selection_two[1] == @previous_placement[1] #vertical placement
       if @previous_placement[0].ord - selection_two[0].ord == -1
         @board[selection_two[0]][selection_two[1].to_i] = "s2"
-      # elsif @previous_placement[0].ord - selection_two[0].ord == 1
-    elsif @previous_placement[0].ord - selection_two[0].ord == 1
+      elsif @previous_placement[0].ord - selection_two[0].ord == 1
         @board[selection_two[0]][selection_two[1].to_i] = "s2"
       else
         puts "not a valid selection, please select again"
       end
-      # @board[selection_two[0]][selection_two[1].to_i] = "s2"
     end
   end
 

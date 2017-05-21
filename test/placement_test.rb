@@ -92,12 +92,22 @@ class PlacementTest < Minitest::Test
 
   def test_if_positive_vert_placement_works
     placement = Placement.new
-    placement.first_placement("b1")
-    actual = placement.second_placement("a1")
+    placement.first_placement("b4")
+    actual = placement.second_placement("a4")
     expected = "s2"
-binding.pry
-    assert_equal expected, actual
+    binding.pry
 
+    assert_equal expected, actual
   end
+
+  def test_if_not_allowed_vert_placement_works
+    placement = Placement.new
+    placement.first_placement("a1")
+    actual = placement.second_placement("c1")
+    expected = nil
+
+    assert_nil expected, actual
+  end
+
 
 end
