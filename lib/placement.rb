@@ -64,9 +64,14 @@ class Placement
     potential_two = potential_two.chr + input[1]
     potential_three = input[0].ord - 2
     potential_three = potential_three.chr + input[1]
-    binding.pry
 
-
+    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+      north = true
+      binding.pry
+    else
+      north = false
+    end
+   north
   end
 
 

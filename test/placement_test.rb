@@ -125,13 +125,13 @@ class PlacementTest < Minitest::Test
     assert_nil expected, actual
   end
 
-  def test_if_north_works
+  def test_if_north_returns_true
     placement = Placement.new
+    placement.b_first_placement("c2")
     actual = placement.north("c2")
-    expected = "a2"
+    expected = true
 
     assert_equal expected, actual
-
   end
 
 
