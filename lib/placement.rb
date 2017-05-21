@@ -67,12 +67,27 @@ class Placement
 
     if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
       north = true
-      binding.pry
     else
       north = false
     end
    north
   end
+
+  def south(input)
+    potential_two = input[0].ord + 1
+    potential_two = potential_two.chr + input[1]
+    potential_three = input[0].ord + 2
+    potential_three = potential_three.chr + input[1]
+
+    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+      south = true
+    else
+      south = false
+    end
+   south
+  end
+
+
 
 
   def previous_ship_placement

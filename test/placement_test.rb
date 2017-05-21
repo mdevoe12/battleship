@@ -134,5 +134,33 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_if_north_returns_false
+    placement = Placement.new
+    placement.first_placement("a2")
+    placement.b_first_placement("c2")
+    actual = placement.north("c2")
+
+    expected = false
+  end
+
+  def test_if_south_returns_true
+    placement = Placement.new
+    placement.b_first_placement("b1")
+    actual = placement.south("b1")
+    expected = true
+
+    assert_equal expected, actual
+  end
+
+  def test_if_south_returns_false
+    placement = Placement.new
+    placement.first_placement("c1")
+    placement.b_first_placement("b1")
+    actual = placement.south("b1")
+    expected = false
+
+    assert_equal expected, actual
+  end
+
 
 end
