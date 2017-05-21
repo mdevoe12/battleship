@@ -10,8 +10,6 @@ class PlacementTest < Minitest::Test
     placement = Placement.new
   end
 
-
-
   def test_if_first_placement_works
     placement = Placement.new
     expected = "s1"
@@ -50,13 +48,15 @@ class PlacementTest < Minitest::Test
     placement = Placement.new
     placement.first_placement("a1")
     expected = "a1"
-    actual = placement.find_previous_ship_placement
+    actual = placement.previous_ship_placement
 
     assert_equal expected, actual
   end
 
+  def test_if_place_on_same_coordinates_fails
+    placement = Placement.new
+    placement.first_placement("a1")
 
-
-
+  end
 
 end

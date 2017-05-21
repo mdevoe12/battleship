@@ -2,46 +2,48 @@ require 'pry'
 
 class Placement
 
+  attr_reader :place, :previous_ship_placement
+
   def initialize
     @board = {"a" => [nil, "", "", "", ""],
               "b" => [nil, "", "", "", ""],
               "c" => [nil, "", "", "", ""],
               "d" => [nil, "", "", "", ""]}
+    @previous_placement = ""
 
   end
 
 
-  def first_placement(selection)
-    if selection[1] == "0"
+  def first_placement(selection_one)
+    if selection_one[1] == "0"
       puts "not a valid selection, please select again"
       #call back to choice of spot or redirec to selection screen
     else
-      @board[selection[0]][selection[1].to_i] = "s1"
+      @board[selection_one[0]][selection_one[1].to_i] = "s1"
     end
-    @board[selection[0]][selection[1].to_i]
+    @board[selection_one[0]][selection_one[1].to_i]
   end
 
-  def second_placement(selection)
-    if selection[1] == "0"
+  def second_placement(selection_two)
+    previous_ship_placement
+    if selection_two[1] == "0"
       puts "not a valid selection, please select again"
       #call back to choice of spot or redirect to selection screen
-    elsif selection[1].to_i == @board["a"].index("s1")
-        # if selection[0] == @board[key]
-      @board[selection[0]][selection[1].to_i] = "s2"
+    elsif selection_two[1] == @previous_placement[1]
+      @board[selection_two[0]][selection_two[1].to_i] = "s2"
     end
   end
 
-  def find_previous_ship_placement
-
-    place = ""
+  def previous_ship_placement
     @board.each do |key, row|
       row.find do |index|
         if index == "s1"
-          place = key + row.index(index).to_s
+          @previous_placement = key + row.index(index).to_s
         end
       end
+
     end
-    place
+    @previous_placement
   end
 
 end
