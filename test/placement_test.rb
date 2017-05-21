@@ -86,8 +86,18 @@ class PlacementTest < Minitest::Test
     placement.first_placement("b1")
     actual = placement.second_placement("c1")
     expected = "s2"
-    binding.pry
+
     assert_equal expected, actual
+  end
+
+  def test_if_positive_vert_placement_works
+    placement = Placement.new
+    placement.first_placement("b1")
+    actual = placement.second_placement("a1")
+    expected = "s2"
+binding.pry
+    assert_equal expected, actual
+
   end
 
 end
