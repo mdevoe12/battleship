@@ -35,7 +35,7 @@ class PlacementTest < Minitest::Test
     assert_nil expected, actual
   end
 
-  def test_if_second_placement_index_check_works
+  def test_if_second_placement_vertical_check_works
     placement = Placement.new
     placement.first_placement("a1")
     expected = "s2"
@@ -53,10 +53,13 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_if_place_on_same_coordinates_fails
+  def test_if_horizontal_placement_works
     placement = Placement.new
     placement.first_placement("a1")
+    expected = "s2"
+    actual = placement.second_placement("a2")
 
+    assert_equal expected, actual
   end
 
 end
