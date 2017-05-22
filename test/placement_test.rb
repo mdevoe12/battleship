@@ -281,6 +281,24 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_if_b_second_succeeds_with_east
+    placement = Placement.new
+    placement.b_first_placement("c1")
+    actual = placement.b_second_placement("c2")
+    expected = "b2"
+
+    assert_equal expected, actual
+  end
+
+  def test_if_b_second_fails_with_east
+    placement = Placement.new
+    placement.b_first_placement("c3")
+    actual = placement.b_second_placement("c4")
+    expected = nil
+
+    assert_nil expected, actual
+  end
+
 
 
 

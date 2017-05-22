@@ -53,18 +53,27 @@ class Placement
 
 
   def b_first_placement(selection_three)
-    if @board[selection_three[0]][selection_three[1].to_i] == ""
-      if north(selection_three) == true || west(selection_three) == true || south(selection_three) == true || east(selection_three) == true
-        @board[selection_three[0]][selection_three[1].to_i] = "b1"
-      end
-    elsif north(selection_three) == false || west(selection_three) == false || south(selection_three) == false || east(selection_three) == false
-        puts "invalid selection, your battleship won't work here, please try again."
+    if   (@board[selection_three[0]][selection_three[1].to_i] == "") &&
+         (north(selection_three) == true) ||
+         (west(selection_three) == true)  ||
+         (south(selection_three) == true) ||
+         (east(selection_three) == true)
+            @board[selection_three[0]][selection_three[1].to_i] = "b1"
+
+    elsif (north(selection_three) == false) ||
+          (west(selection_three) == false)  ||
+          (south(selection_three) == false) ||
+          (east(selection_three) == false)
+            puts "invalid selection, your battleship won't work here, please try again."
     end
   end
 
   def b_second_placement(selection_four)
     previous_ship_placement("b1")
-    if (@board[selection_four[0]][selection_four[1].to_i] == "") && (north_two(selection_four) == true) || (south_two(selection_four) == true)
+    if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
+      (north_two(selection_four) == true) ||
+      (south_two(selection_four) == true) ||
+      (east_two(selection_four)  == true)
       if selection_four[0] == @previous_placement[0] #horizontal  placement
         if @previous_placement[1].to_i - selection_four[1].to_i == -1
           @board[selection_four[0]][selection_four[1].to_i] = "b2"
@@ -82,7 +91,9 @@ class Placement
           puts "not a valid selection, please select again"
         end
       end
-    else (north(selection_four) == false) && (south(selection_four) == false) #|| west(selection_four) == false || south(selection_four) == false || east(selection_four) == false
+    else (north_two(selection_four) == false) &&
+         (south_two(selection_four) == false) &&#|| west(selection_four) == false || south(selection_four) == false || east(selection_four) == false
+         (east_two(selection_four) == false)
         puts "invalid selection, your battleship won't work here, please try again."
     end
   end
@@ -95,7 +106,8 @@ class Placement
 
     if (potential_two[0].ord < 97) || (potential_three[0].ord < 97)
       north = false
-    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") &&
+          (@board[potential_three[0]][potential_three[1].to_i] == "")
       north = true
     else
       north = false
@@ -125,7 +137,8 @@ class Placement
 
     if (potential_two[0].ord > 100) || (potential_three[0].ord > 100)
       south = false
-    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") &&
+          (@board[potential_three[0]][potential_three[1].to_i] == "")
       south = true
     else
       south = false
@@ -151,7 +164,19 @@ class Placement
     potential_two = input[0] + (input[1].to_i + 1).to_s
     potential_three = input[0] + (input[1].to_i + 2).to_s
 
-    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    if (@board[potential_two[0]][potential_two[1].to_i] == "") &&
+       (@board[potential_three[0]][potential_three[1].to_i] == "")
+      east = true
+    else
+      east = false
+    end
+   east
+  end
+
+  def east_two(input)
+    potential_three = input[0] + (input[1].to_i + 1).to_s
+
+    if @board[potential_three[0]][potential_three[1].to_i] == ""
       east = true
     else
       east = false
@@ -163,7 +188,8 @@ class Placement
     potential_two = input[0] + (input[1].to_i - 1).to_s
     potential_three = input[0] + (input[1].to_i - 2).to_s
 
-    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    if (@board[potential_two[0]][potential_two[1].to_i] == "") &&
+       (@board[potential_three[0]][potential_three[1].to_i] == "")
       west = true
     else
       west = false
