@@ -54,9 +54,9 @@ class Placement
 
   def b_first_placement(selection_three)
     if @board[selection_three[0]][selection_three[1].to_i] == ""
-      if north(selection_three) == true || west(selection_three) == true || south(selection_three) == true || east(selection_three) == true
+      # if north(selection_three) == true || west(selection_three) == true || south(selection_three) == true || east(selection_three) == true
         @board[selection_three[0]][selection_three[1].to_i] = "b1"
-      end
+      # end
     end
   end
 
@@ -80,7 +80,10 @@ class Placement
     potential_three = input[0].ord + 2
     potential_three = potential_three.chr + input[1]
 
-    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    # binding.pry
+    if (potential_two[0].ord > 100) || (potential_three[0].ord > 100)
+      south = false
+    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
       south = true
     else
       south = false
