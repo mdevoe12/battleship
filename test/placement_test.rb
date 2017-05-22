@@ -48,7 +48,7 @@ class PlacementTest < Minitest::Test
     placement = Placement.new
     placement.first_placement("a1")
     expected = "a1"
-    actual = placement.previous_ship_placement
+    actual = placement.previous_ship_placement("s1")
 
     assert_equal expected, actual
   end
@@ -146,8 +146,8 @@ class PlacementTest < Minitest::Test
 
   def test_if_north_returns_false_off_grid
     placement = Placement.new
-    placement.b_first_placement("b2")
-    actual = placement.north("b2")
+    placement.b_first_placement("a2")
+    actual = placement.north("a2")
     expected = false
 
     assert_equal expected, actual
@@ -244,9 +244,22 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  
+  def test_if_b_second_works
+    placement = Placement.new
+    placement.b_first_placement("a3")
+    actual = placement.b_second_placement("b3")
+    expected = "b2"
 
+    assert_equal expected, actual
+  end
 
+  def test_if_b_second_fails_with_north
+    placement = Placement.new
+    placement.b_first_placement("b4")
+    actual = placement.b_second_placement("a4")
+    expected = nil
 
+    assert_nil expected, actual
+  end
 
 end
