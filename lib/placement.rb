@@ -54,10 +54,10 @@ class Placement
 
   def b_first_placement(selection_three)
     if   (@board[selection_three[0]][selection_three[1].to_i] == "") &&
-         (north(selection_three) == true) ||
-         (west(selection_three) == true)  ||
-         (south(selection_three) == true) ||
-         (east(selection_three) == true)
+         ((north(selection_three) == true) ||
+         (west(selection_three) == true)   ||
+         (south(selection_three) == true)  ||
+         (east(selection_three) == true))
             @board[selection_three[0]][selection_three[1].to_i] = "b1"
 
     elsif (north(selection_three) == false) ||
@@ -68,13 +68,16 @@ class Placement
     end
   end
 
+
   def b_second_placement(selection_four)
     previous_ship_placement("b1")
-    if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
-      (north_two(selection_four) == true) ||
-      (south_two(selection_four) == true) ||
-      (east_two(selection_four)  == true)
-      if selection_four[0] == @previous_placement[0] #horizontal  placement
+    if selection_four[1] == "0"
+      puts "not a valid selection, please select again"
+    elsif selection_four[1].to_i > 4
+      puts "not a valid selection please select again"
+    elsif selection_four[0].ord > 100
+      puts "not a valid selection, choice off grid plese select again"
+    elsif selection_four[0] == @previous_placement[0] #horizontal  placement
         if @previous_placement[1].to_i - selection_four[1].to_i == -1
           @board[selection_four[0]][selection_four[1].to_i] = "b2"
         elsif @previous_placement[1].to_i - selection_four[1].to_i == 1
@@ -82,21 +85,75 @@ class Placement
         else
           puts "not a valid selection, please select again"
         end
-      else selection_four[1] == @previous_placement[1] #vertical placement
-        if @previous_placement[0].ord - selection_four[0].ord == -1
-          @board[selection_four[0]][selection_four[1].to_i] = "b2"
-        elsif @previous_placement[0].ord - selection_four[0].ord == 1
-          @board[selection_four[0]][selection_four[1].to_i] = "b2"
-        else
-          puts "not a valid selection, please select again"
-        end
+    else selection_four[1] == @previous_placement[1] #vertical placement
+      if @previous_placement[0].ord - selection_four[0].ord == -1
+        @board[selection_four[0]][selection_four[1].to_i] = "b2"
+      elsif @previous_placement[0].ord - selection_four[0].ord == 1
+        @board[selection_four[0]][selection_four[1].to_i] = "b2"
+      else
+        puts "not a valid selection, please select again"
       end
-    else (north_two(selection_four) == false) &&
-         (south_two(selection_four) == false) &&#|| west(selection_four) == false || south(selection_four) == false || east(selection_four) == false
-         (east_two(selection_four) == false)
-        puts "invalid selection, your battleship won't work here, please try again."
     end
   end
+
+
+
+
+  # def b_second_placement(selection_four)
+  #   previous_ship_placement("b1")
+  #
+  #   if selection_four[0] == @previous_placement[0] #horizontal  placement
+  #           if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
+  #              ((east_two(selection_four) == true) ||
+  #              (west_two(selection_four) == true))
+  #           if @previous_placement[1].to_i - selection_four[1].to_i == -1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           elsif @previous_placement[1].to_i - selection_four[1].to_i == 1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           else
+  #             puts "not a valid selection, please select again"
+  #           end
+  #         end
+  #   elsif (selection_four[1] == @previous_placement[1]) #vertical placement
+  #         if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
+  #            (north_two(selection_four) == true)
+  #           if @previous_placement[0].ord - selection_four[0].ord == -1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           elsif @previous_placement[0].ord - selection_four[0].ord == 1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           else
+  #             puts "not a valid selection, please select again"
+  #           end
+  #         end
+  #   elsif (selection_four[1] == @previous_placement[1]) #vertical placement
+  #         if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
+  #            (south_two(selection_four) == true) ||
+  #            (north_two(selection_four)
+  #           if @previous_placement[0].ord - selection_four[0].ord == -1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           elsif @previous_placement[0].ord - selection_four[0].ord == 1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           else
+  #             puts "not a valid selection, please select again"
+  #           end
+  #         end
+  #   elsif selection_four[0] == @previous_placement[0] #horizontal  placement
+  #           if (@board[selection_four[0]][selection_four[1].to_i] == "") &&
+  #              (west_two(selection_four) == true)
+  #           if @previous_placement[1].to_i - selection_four[1].to_i == -1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           elsif @previous_placement[1].to_i - selection_four[1].to_i == 1
+  #             @board[selection_four[0]][selection_four[1].to_i] = "b2"
+  #           else
+  #             puts "not a valid selection, please select again"
+  #           end
+  #         end
+  #   else (north_two(selection_four) == false) &&
+  #        (south_two(selection_four) == false) &&#|| west(selection_four) == false || south(selection_four) == false || east(selection_four) == false
+  #        (east_two(selection_four) == false)
+  #       puts "invalid selection, your battleship won't work here, please try again."
+  #   end
+  # end
 
   def north(input)
     potential_two = input[0].ord - 1
@@ -175,7 +232,6 @@ class Placement
 
   def east_two(input)
     potential_three = input[0] + (input[1].to_i + 1).to_s
-
     if @board[potential_three[0]][potential_three[1].to_i] == ""
       east = true
     else
@@ -194,10 +250,20 @@ class Placement
     else
       west = false
     end
+
    west
   end
 
+  def west_two(input)
+    potential_three = input[0] + (input[1].to_i - 1).to_s
 
+    if @board[potential_three[0]][potential_three[1].to_i] == ""
+      west = true
+    else
+      west = false
+    end
+   west
+  end
 
   def previous_ship_placement(input)
     @board.each do |key, row|
