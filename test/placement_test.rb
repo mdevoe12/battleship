@@ -244,6 +244,8 @@ class PlacementTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  
+
 
 
 
