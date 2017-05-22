@@ -246,8 +246,8 @@ class PlacementTest < Minitest::Test
 
   def test_if_b_second_works
     placement = Placement.new
-    placement.b_first_placement("a3")
-    actual = placement.b_second_placement("b3")
+    placement.b_first_placement("d3")
+    actual = placement.b_second_placement("c3")
     expected = "b2"
 
     assert_equal expected, actual
@@ -261,5 +261,27 @@ class PlacementTest < Minitest::Test
 
     assert_nil expected, actual
   end
+
+  def test_if_b_second_fails_with_south
+    placement = Placement.new
+    placement.b_first_placement("c4")
+    actual = placement.b_second_placement("d4")
+    expected = nil
+
+
+    assert_nil expected, actual
+  end
+
+  def test_if_b_second_succeeds_with_south
+    placement = Placement.new
+    placement.b_first_placement("b4")
+    actual = placement.b_second_placement("c4")
+    expected = "b2"
+
+    assert_equal expected, actual
+  end
+
+
+
 
 end
