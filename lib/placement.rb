@@ -66,7 +66,9 @@ class Placement
     potential_three = input[0].ord - 2
     potential_three = potential_three.chr + input[1]
 
-    if (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
+    if (potential_two[0].ord < 97) || (potential_three[0].ord < 97)
+      north = false
+    elsif (@board[potential_two[0]][potential_two[1].to_i] == "") && (@board[potential_three[0]][potential_three[1].to_i] == "")
       north = true
     else
       north = false

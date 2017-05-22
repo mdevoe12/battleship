@@ -139,11 +139,19 @@ class PlacementTest < Minitest::Test
     placement.first_placement("a2")
     placement.b_first_placement("c2")
     actual = placement.north("c2")
-
     expected = false
+
+    assert_equal expected, actual
   end
 
-  
+  def test_if_north_returns_false_off_grid
+    placement = Placement.new
+    placement.b_first_placement("b2")
+    actual = placement.north("b2")
+    expected = false
+
+    assert_equal expected, actual
+  end
 
   def test_if_south_returns_true
     placement = Placement.new
