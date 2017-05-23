@@ -31,7 +31,16 @@ class ComputerPlacementTest < Minitest::Test
     computerplacement = ComputerPlacement.new
     actual = computerplacement.comp_first_choice
     expected = "x1"
-binding.pry
+
+    assert_equal expected, actual
+  end
+
+  def test_if_comp_second_choice_works
+    computerplacement = ComputerPlacement.new
+    computerplacement.comp_first_choice
+    actual = computerplacement.comp_second_choice
+    expected = "x2"
+
     assert_equal expected, actual
   end
 

@@ -212,7 +212,7 @@ class PlacementRulesTest < Minitest::Test
     placement.b_second_placement("c3")
     actual = placement.b_third_placement("b3")
     expected = "y3"
- binding.pry
+
     assert_equal expected, actual
   end
 
