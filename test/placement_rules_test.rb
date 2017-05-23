@@ -197,10 +197,22 @@ class PlacementRulesTest < Minitest::Test
   def test_if_L_shape_is_denied_horiz
     placement = PlacementRules.new
     placement.b_first_placement("a1")
-    placement.b_second_placement("y1")
+    placement.b_second_placement("b1")
     actual = placement.b_third_placement("b2")
     expected = nil
 
+    assert_equal expected, actual
+  end
+
+  def test_if_full_board_placement_works
+    placement = PlacementRules.new
+    placement.first_placement("a1")
+    placement.second_placement("b1")
+    placement.b_first_placement("d3")
+    placement.b_second_placement("c3")
+    actual = placement.b_third_placement("b3")
+    expected = "y3"
+ binding.pry
     assert_equal expected, actual
   end
 

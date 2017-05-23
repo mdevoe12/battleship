@@ -62,27 +62,28 @@ class PlacementRules
 
 
   def b_second_placement(selection_four)
-    previous_ship_placement("y1")
+    # previous_ship_placement("y1")
     if selection_four[1] == "0" || selection_four[1].to_i > 4
       puts "not a valid selection, please select again"
     elsif selection_four[0].ord > 100
       puts "not a valid selection, choice off grid plese select again"
     elsif @board[selection_four[0]][selection_four[1].to_i] != ""
       puts "not a valid selection, space occupied"
-    elsif (selection_four[0] == @previous_placement[0])
+    elsif (selection_four[0] == previous_ship_placement("y1")[0])
+
            #horizontal  placement
-        if @previous_placement[1].to_i - selection_four[1].to_i == -1
+        if previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == -1
           @board[selection_four[0]][selection_four[1].to_i] = "y2"
-        elsif @previous_placement[1].to_i - selection_four[1].to_i == 1
+        elsif previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == 1
           @board[selection_four[0]][selection_four[1].to_i] = "y2"
         else
           puts "not a valid selection, please select again"
         end
-    else (selection_four[1] == @previous_placement[1])
+    else (selection_four[1] == previous_ship_placement("y1")[1])
         #vertical placement
-      if @previous_placement[0].ord - selection_four[0].ord == -1
+      if previous_ship_placement("y1")[0].ord - selection_four[0].ord == -1
         @board[selection_four[0]][selection_four[1].to_i] = "y2"
-      elsif @previous_placement[0].ord - selection_four[0].ord == 1
+      elsif previous_ship_placement("y1")[0].ord - selection_four[0].ord == 1
         @board[selection_four[0]][selection_four[1].to_i] = "y2"
       else
         puts "not a valid selection, please select again"
