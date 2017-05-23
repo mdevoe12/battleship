@@ -6,39 +6,23 @@ require './lib/computer_placement'
 
 class ComputerPlacementTest < Minitest::Test
 
-  def test_if_it_creates
+  def test_if_create_class_works
     computerplacement = ComputerPlacement.new
 
   end
 
-  def test_if_it_can_place_first_spot
+  def test_if_first_placement_works
     computerplacement = ComputerPlacement.new
-    actual = computerplacement.computer_board.first_placement("a1")
+    actual = computerplacement.first_placement("a1")
     expected = "x1"
 
     assert_equal expected, actual
   end
 
-  def test_if_random_num_is_string
+  def test_if_second_placement_works
     computerplacement = ComputerPlacement.new
-    actual = computerplacement.random_num.class
-    expected = "xx".class
-
-    assert_equal expected, actual
-  end
-
-  def test_if_comp_first_choice_works
-    computerplacement = ComputerPlacement.new
-    actual = computerplacement.comp_first_choice
-    expected = "x1"
-
-    assert_equal expected, actual
-  end
-
-  def test_if_comp_second_choice_works
-    computerplacement = ComputerPlacement.new
-    computerplacement.comp_first_choice
-    actual = computerplacement.comp_second_choice
+    computerplacement.first_placement("a1")
+    actual = computerplacement.second_placement("a1")
     expected = "x2"
 
     assert_equal expected, actual
