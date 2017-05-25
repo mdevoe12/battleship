@@ -1,5 +1,3 @@
-require 'pry'
-
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/computer'
@@ -8,7 +6,6 @@ class ComputerTest < Minitest::Test
 
   def test_if_create_class_works
     computerplacement = Computer.new
-    binding.pry
 
   end
 

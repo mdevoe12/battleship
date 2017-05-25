@@ -100,6 +100,4 @@ class PlayerTest < Minitest::Test
   #   assert_equal expected, actual
   # end
 
-
-
 end

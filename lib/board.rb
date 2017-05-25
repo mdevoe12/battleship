@@ -8,5 +8,4 @@ class Board
               "c" => [nil, "", "", "", ""],
               "d" => [nil, "", "", "", ""]}
   end
-
 end
