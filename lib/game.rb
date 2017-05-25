@@ -23,6 +23,7 @@ puts "Welcome to BATTLESHIP: The Next Generation"
       play
     elsif choice == "q" || choice == "quit"
       puts "Come back when you're ready to battle the Klingons."
+      end_game
     else
       puts "That's not a valid choice, please choose again."
       start_sequence
@@ -115,13 +116,29 @@ puts "Welcome to BATTLESHIP: The Next Generation"
       end
     end
     if (player = @computer_player) && ((x_count == 0) && (y_count == 0))
-    puts "You've destoryed the Kinlgon's Fleet!"
-    #put end method here
+      puts "====================================="
+      puts "You've destoryed the Klingon's Fleet!"
+      puts "V-I-C-T-O-R-Y"
+      puts "====================================="
+      end_game
+    elsif (player = @human_player) && ((x_count == 0) && (y_count == 0))
+      puts "====================================="
+      puts "The KLINGONS have destroyed your Fleet"
+      puts "D-E-F-E-A-T"
+      puts "====================================="
+      end_game
     elsif x_count == 0
       puts "You've destroyed a Size 2 Ship"
     elsif y_count == 0
       puts "You've destoryed a Size 3 Ship"
     end
+  end
+
+  def end_game
+    puts
+    puts "Thanks for playing BATTLESHIP: The Next Generation"
+    puts
+    exit
   end
 
   def random_num
@@ -133,22 +150,22 @@ puts "Welcome to BATTLESHIP: The Next Generation"
 
   def display_board
     row_a = "A" + @computer_player.board["a"].join("     ")
-    row_a = row_a.gsub(/[xy123]/, "")
+    row_a = row_a.gsub(/[xy123 ]/, " ")
     row_b = "B" + @computer_player.board["b"].join("     ")
-    row_b = row_b.gsub(/[xy123]/, "")
+    row_b = row_b.gsub(/[xy123 ]/, " ")
     row_c = "C" + @computer_player.board["c"].join("     ")
-    row_c = row_c.gsub(/[xy123]/, "")
+    row_c = row_c.gsub(/[xy123 ]/, " ")
     row_d = "D" + @computer_player.board["d"].join("     ")
-    row_d = row_d.gsub(/[xy123]/, "")
+    row_d = row_d.gsub(/[xy123 ]/, " ")
     puts "============================="
     puts ".     1     2     3     4"
-    puts ""
+    puts
     puts row_a
-    puts ""
+    puts
     puts row_b
-    puts ""
+    puts
     puts row_c
-    puts ""
+    puts
     puts row_d
     puts "============================="
   end
