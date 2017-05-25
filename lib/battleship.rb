@@ -14,7 +14,7 @@ puts "Welcome to BATTLESHIP: The Next Generation"
 puts "=========================================="
 puts
 puts "What is your name?"
-name = gets.chomp
+name = gets.chomp.downcase
 puts "Hello Captain #{name}, I'm Commander Data."
 puts "I'll be your guide during our battle with the Klingons"
 puts
@@ -23,7 +23,7 @@ puts
     puts
     puts "Would you like to (p)lay, read the (i)instructions or (q)uit?"
     puts
-    choice = gets.chomp
+    choice = gets.chomp.downcase
     if    choice == "i" || choice == "instructions"
           instructions
     elsif choice == "p" || choice == "play"
@@ -62,7 +62,7 @@ puts
 
   def request_shot
     puts "please enter your shot coordinates"
-    shot = gets.chomp
+    shot = gets.chomp.downcase
     puts `clear`
     player_check(shot)
   end
@@ -145,7 +145,7 @@ puts
       @end_time = Time.now
       game_time
       puts "================================================================="
-      puts "          V-I-C-T-O-R-Y"
+      puts "                       V-I-C-T-O-R-Y"
       puts
       puts "You destroyed the Klingon's Fleet with #{@shot_counter} torpedoes"
       puts "It took you #{@game_time} seconds to complete your mission."

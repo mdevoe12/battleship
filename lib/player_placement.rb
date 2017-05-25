@@ -25,7 +25,7 @@ class PlayerPlacement
 
   def first_placement
     puts "Please choose your first boat placement"
-    selection_one = gets.chomp
+    selection_one = gets.chomp.downcase
     x_first_placement(selection_one)
   end
 
@@ -45,7 +45,7 @@ class PlayerPlacement
 
 def second_placement
   puts "Please choose your second boat placement"
-  selection_two = gets.chomp
+  selection_two = gets.chomp.downcase
   x_second_placement(selection_two)
 end
 
@@ -86,7 +86,7 @@ end
 
   def third_placement
     puts "Please choose the first place of your second boat."
-    selection_three = gets.chomp
+    selection_three = gets.chomp.downcase
     y_first_placement(selection_three)
   end
 
@@ -109,7 +109,7 @@ end
 
   def fourth_placement
     puts "Please choose the second place of your second boat."
-    selection_four = gets.chomp
+    selection_four = gets.chomp.downcase
     y_second_placement(selection_four)
   end
 
@@ -150,7 +150,7 @@ end
 
   def fifth_placement
     puts "Please choose the third place of your second boat."
-    selection_five = gets.chomp
+    selection_five = gets.chomp.downcase
     y_third_placement(selection_five)
   end
 
