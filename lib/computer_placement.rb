@@ -1,15 +1,27 @@
 require 'pry'
+#require 'board'
 
 class ComputerPlacement
 
-  attr_reader :previous_ship_placement
+  attr_reader :previous_ship_placement, :board
 
   def initialize
+    # @computer_board = Board.new
     @board = {"a" => [nil, "", "", "", ""],
               "b" => [nil, "", "", "", ""],
               "c" => [nil, "", "", "", ""],
               "d" => [nil, "", "", "", ""]}
     @previous_placement = ""
+
+  run
+  end
+
+  def run
+    x_first_placement(random_num)
+    x_second_placement(random_num)
+    y_first_placement(random_num)
+    y_second_placement(random_num)
+    y_third_placement(random_num)
   end
 
   def x_first_placement(selection_one)
