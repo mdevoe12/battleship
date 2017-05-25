@@ -1,6 +1,6 @@
 require 'pry'
 
-class PlayerPlacement
+class Player
 
   attr_reader :previous_ship_placement, :board
 
@@ -10,9 +10,6 @@ class PlayerPlacement
               "c" => [nil, "", "", "", ""],
               "d" => [nil, "", "", "", ""]}
     @previous_placement = ""
-
-
-    run
   end
 
   def run
@@ -28,7 +25,6 @@ class PlayerPlacement
     selection_one = gets.chomp.downcase
     x_first_placement(selection_one)
   end
-
 
   def x_first_placement(selection_one)
     if (selection_one[0].ord > 100) || (selection_one[0].ord < 97)
@@ -204,13 +200,3 @@ end
   end
 
 end
-
-
-# player = PlayerPlacement.new
-# player.first_placement
-# player.second_placement
-# player.third_placement
-# player.fourth_placement
-# player.fifth_placement
-#
-# puts player.inspect

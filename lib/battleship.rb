@@ -1,6 +1,6 @@
 require 'pry'
-require './lib/computer_placement'
-require './lib/player_placement'
+require './lib/computer'
+require './lib/player'
 
 class Battleship
 
@@ -14,7 +14,7 @@ puts "Welcome to BATTLESHIP: The Next Generation"
 puts "=========================================="
 puts
 puts "What is your name?"
-name = gets.chomp.downcase
+name = gets.chomp
 puts "Hello Captain #{name}, I'm Commander Data."
 puts "I'll be your guide during our battle with the Klingons"
 puts
@@ -37,6 +37,7 @@ puts
   end
 
   def quit
+    puts `clear`
     puts
     puts "Come back when you're ready to battle the Klingons."
     end_game
@@ -54,8 +55,10 @@ puts
     puts "================"
     puts "  E-N-G-A-G-E   "
     puts "================"
-    @computer_player = ComputerPlacement.new
-    @human_player = PlayerPlacement.new
+    @computer_player = Computer.new
+    @computer_player.run
+    @human_player = Player.new
+    @human_player.run
     @start_time
     request_shot
   end
@@ -212,6 +215,7 @@ puts
   end
 
   def instructions_text
+    puts `clear`
     puts "====================================================================="
     puts "BATTLESHIP: The Next Generation is an intense test simulation for "
     puts "battling the Klingon threat. If you choose to (p)lay, the Klingons"
@@ -233,8 +237,7 @@ puts
     puts "grid. These coordinates will also conform to a a-d, 1-4 match."
     puts
     puts "As you fire shots, the Klingons will as well. You'll see an updated"
-    puts "battle map with your hits, designated with an H or a miss, designated"
-    puts "with an M."
+    puts "battle map with your hits (H) or a miss (M)."
     puts
     puts "The battle is over when one of the fleets are destroyed."
     puts

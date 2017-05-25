@@ -1,7 +1,7 @@
 require 'pry'
 #require 'board'
 
-class ComputerPlacement
+class Computer
 
   attr_reader :previous_ship_placement, :board
 
@@ -13,7 +13,7 @@ class ComputerPlacement
               "d" => [nil, "", "", "", ""]}
     @previous_placement = ""
 
-  run
+  
   end
 
   def run

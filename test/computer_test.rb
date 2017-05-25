@@ -2,17 +2,17 @@ require 'pry'
 
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/computer_placement'
+require './lib/computer'
 
-class ComputerPlacementTest < Minitest::Test
+class ComputerTest < Minitest::Test
 
   def test_if_create_class_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
 
   end
 
   def test_if_first_placement_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
     actual = computerplacement.x_first_placement("a1")
     expected = "x1"
 
@@ -20,7 +20,7 @@ class ComputerPlacementTest < Minitest::Test
   end
 
   def test_if_second_placement_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
     computerplacement.x_first_placement("a1")
     actual = computerplacement.x_second_placement("b1")
     expected = "x2"
@@ -29,7 +29,7 @@ class ComputerPlacementTest < Minitest::Test
   end
 
   def test_if_y_first_placement_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
     computerplacement.x_first_placement("a1")
     computerplacement.x_second_placement("b1")
     actual = computerplacement.y_first_placement("d1")
@@ -39,7 +39,7 @@ class ComputerPlacementTest < Minitest::Test
   end
 
   def test_if_y_second_placement_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
     computerplacement.x_first_placement("a1")
     computerplacement.x_second_placement("b1")
     computerplacement.y_first_placement("c2")
@@ -50,7 +50,7 @@ class ComputerPlacementTest < Minitest::Test
   end
 
   def test_if_y_third_placement_works
-    computerplacement = ComputerPlacement.new
+    computerplacement = Computer.new
     computerplacement.x_first_placement("a1")
     computerplacement.x_second_placement("a2")
     computerplacement.y_first_placement("d1")
