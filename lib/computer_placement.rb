@@ -134,4 +134,5 @@ class ComputerPlacement
     random_number = letter_gen.sample + rand(num_gen).to_s
   end
 
+
 end

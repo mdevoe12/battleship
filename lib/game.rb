@@ -21,8 +21,6 @@ puts "Welcome to BATTLESHIP: The Next Generation"
       instructions
     elsif choice == "p" || choice == "play"
       play
-      #call computer placement
-      #followed by player placement
     elsif choice == "q" || choice == "quit"
       puts "Come back when you're ready to battle the Klingons."
     else
@@ -73,7 +71,9 @@ puts "Welcome to BATTLESHIP: The Next Generation"
     ship_status(@computer_player)
     # print board
     puts "The Klingons are shooting! Brace for impact!!!"
-    puts @computer_player.board
+    puts ""
+
+    display_board
     computer_shot
   end
 
@@ -100,7 +100,6 @@ puts "Welcome to BATTLESHIP: The Next Generation"
     puts @human_player.board
     request_shot
   end
-
 
 
   def ship_status(player)
@@ -130,6 +129,28 @@ puts "Welcome to BATTLESHIP: The Next Generation"
     num_gen = (1..4)
     letter_gen = ["a", "b", "c", "d"]
     random_number = letter_gen.sample + rand(num_gen).to_s
+  end
+
+  def display_board
+    row_a = "A" + @computer_player.board["a"].join("     ")
+    row_a = row_a.gsub(/[xy123]/, "")
+    row_b = "B" + @computer_player.board["b"].join("     ")
+    row_b = row_b.gsub(/[xy123]/, "")
+    row_c = "C" + @computer_player.board["c"].join("     ")
+    row_c = row_c.gsub(/[xy123]/, "")
+    row_d = "D" + @computer_player.board["d"].join("     ")
+    row_d = row_d.gsub(/[xy123]/, "")
+    puts "============================="
+    puts ".     1     2     3     4"
+    puts ""
+    puts row_a
+    puts ""
+    puts row_b
+    puts ""
+    puts row_c
+    puts ""
+    puts row_d
+    puts "============================="
   end
 
 end
