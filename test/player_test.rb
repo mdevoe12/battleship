@@ -82,7 +82,6 @@ class PlayerTest < Minitest::Test
   # end
 
 
-
   # def test_if_put_on_occupied_square
   #   player_placement = PlayerPlacement.new
   #   player_placement.x_first_placement("b1")

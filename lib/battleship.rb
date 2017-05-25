@@ -1,4 +1,3 @@
-require 'pry'
 require './lib/computer'
 require './lib/player'
 

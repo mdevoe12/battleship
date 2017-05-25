@@ -1,14 +1,12 @@
-require 'pry'
+require './lib/board'
 
 class Player
 
-  attr_reader :previous_ship_placement, :board
+  attr_reader :previous_ship_placement,
+              :board
 
   def initialize
-    @board = {"a" => [nil, "", "", "", ""],
-              "b" => [nil, "", "", "", ""],
-              "c" => [nil, "", "", "", ""],
-              "d" => [nil, "", "", "", ""]}
+    @board = Board.new.board
     @previous_placement = ""
   end
 

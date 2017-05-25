@@ -1,19 +1,13 @@
-require 'pry'
-#require 'board'
+require './lib/board'
 
 class Computer
 
-  attr_reader :previous_ship_placement, :board
+  attr_reader :previous_ship_placement,
+              :board
 
   def initialize
-    # @computer_board = Board.new
-    @board = {"a" => [nil, "", "", "", ""],
-              "b" => [nil, "", "", "", ""],
-              "c" => [nil, "", "", "", ""],
-              "d" => [nil, "", "", "", ""]}
+    @board = Board.new.board
     @previous_placement = ""
-
-  
   end
 
   def run
@@ -27,7 +21,6 @@ class Computer
   def x_first_placement(selection_one)
       @board[selection_one[0]][selection_one[1].to_i] = "x1"
   end
-
 
   def x_second_placement(selection_two)
     previous_ship_placement("x1")
