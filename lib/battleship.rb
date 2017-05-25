@@ -6,9 +6,8 @@ class Battleship
 
   def initialize
     @shot_counter = 0
+    @start_time = Time.now
   end
-
-
 
 puts "=========================================="
 puts "Welcome to BATTLESHIP: The Next Generation"
@@ -20,14 +19,11 @@ puts "Hello Captain #{name}, I'm Commander Data."
 puts "I'll be your guide during our battle with the Klingons"
 puts
 
-
   def start_sequence
-
     puts
     puts "Would you like to (p)lay, read the (i)instructions or (q)uit?"
     puts
     choice = gets.chomp
-
     if    choice == "i" || choice == "instructions"
           instructions
     elsif choice == "p" || choice == "play"
@@ -60,6 +56,7 @@ puts
     puts "================"
     @computer_player = ComputerPlacement.new
     @human_player = PlayerPlacement.new
+    @start_time
     request_shot
   end
 
@@ -85,7 +82,7 @@ puts
           @shot_counter += 1
     elsif (@computer_player.board[shot[0]][shot[1].to_i].include?("x")) ||
           (@computer_player.board[shot[0]][shot[1].to_i].include?("y"))
-           @computer_player.board[shot[0]][shot[1].to_i] = "H".red
+           @computer_player.board[shot[0]][shot[1].to_i] = "H"
           puts
           puts "It's a hit!"
           puts
@@ -145,17 +142,23 @@ puts
       end
     end
     if (player = @computer_player) && ((x_count == 0) && (y_count == 0))
+      @end_time = Time.now
+      game_time
       puts "================================================================="
       puts "          V-I-C-T-O-R-Y"
       puts
       puts "You destroyed the Klingon's Fleet with #{@shot_counter} torpedoes"
+      puts "It took you #{@game_time} seconds to complete your mission."
       puts "================================================================="
       end_game
     elsif (player = @human_player) && ((x_count == 0) && (y_count == 0))
-      puts "====================================="
+      @end_time = Time.now
+      game_time
+      puts "========================================"
       puts "The KLINGONS have destroyed your Fleet"
       puts "           D-E-F-E-A-T"
-      puts "====================================="
+      puts "It took #{@game_time} seconds for defeat"
+      puts "========================================"
       end_game
     elsif x_count == 0
       puts
@@ -173,6 +176,10 @@ puts
       puts "Thanks for playing BATTLESHIP: The Next Generation"
       puts
       exit
+  end
+
+  def game_time
+    @game_time = @end_time - @start_time
   end
 
   def random_num
