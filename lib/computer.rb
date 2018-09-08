@@ -2,14 +2,22 @@ require './lib/board'
 require 'pry'
 
 class Computer
+  EMPTY_BOARD = {
+    "a" => [nil, "", "", "", ""],
+    "b" => [nil, "", "", "", ""],
+    "c" => [nil, "", "", "", ""],
+    "d" => [nil, "", "", "", ""]
+  }
 
   attr_reader :previous_ship_placement,
               :board
 
   def initialize
-    @board = Board.new.board
+    @board = EMPTY_BOARD
     @previous_placement = ""
     @random_tries = 0
+    @ship_one_key = ''
+    @ship_two_key = ''
   end
 
   def run
@@ -21,10 +29,28 @@ class Computer
     y_third_placement(random_num)
   end
 
-  def x_first_placement(selection_one)
-      @board[selection_one[0]][selection_one[1].to_i] = "x1"
+  def x_first_placement(selection)
+    @ship_one_key = selection[0]
+    @board[selection[0]][selection[1].to_i] = "x1"
+    @previous_placement = selection
+    placement_options
   end
 
+  def placement_options
+    previous_key = @previous_placement[0]
+    previous_index = @previous_placement[1]
+    
+    key_options = []
+    key_options << @board.key([(previous_key.ord + 1).chr]) 
+    key_options << @board.key([(previous_key.ord - 1).chr])
+    
+    key_options.map { |key| key if @board.keys.include?(key) }
+    
+    index_options = []
+    index_options << previous_index.to_i + 1
+    index_options << previous_index.to_i - 1
+    
+  end
 
   def x_second_placement(selection_two)
       if  @board[selection_two[0]][selection_two[1].to_i] != ""
@@ -153,7 +179,6 @@ class Computer
     random_number = ""
     num_gen = rand(1..4)
     letter_gen = ["a", "b", "c", "d"]
-    # binding.pry
     random_number = letter_gen.sample + num_gen.to_s
   end
 
@@ -165,7 +190,7 @@ class Computer
   end
 
   def wipe_board
-    @board = Board.new.board
+    @board = EMPTY_BOARD
   end
 
 
