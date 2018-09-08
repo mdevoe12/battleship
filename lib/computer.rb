@@ -165,15 +165,7 @@ class Computer
   end
 
   def wipe_board
-    @board.each do |key, row|
-      row.each do |index|
-      if    (index == "x1") || (index == "x2")
-            index = ""
-      elsif (index == "y1") || (index == "y2") || (index == "y3")
-            index = ""
-        end
-      end
-    end
+    @board = Board.new.board
   end
 
 

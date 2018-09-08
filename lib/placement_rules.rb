@@ -8,7 +8,7 @@ class PlacementRules
     @board = {"a" => [nil, "", "", "", ""],
               "b" => [nil, "", "", "", ""],
               "c" => [nil, "", "", "", ""],
-              "d" => [nil, "", "", "", ""]}
+              "d" => [nil, "", "", "", ""] }
     @previous_placement = ""
   end
 
