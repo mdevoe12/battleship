@@ -16,20 +16,24 @@ class Computer
     @board = EMPTY_BOARD
     @previous_placement = ""
     @random_tries = 0
+    @options = []
     @ship_one_key = ''
     @ship_two_key = ''
   end
 
   def run
     # wipe_board
-    x_first_placement(random_num)
-    x_second_placement(random_num)
+    # x_first_placement(random_num)
+    # x_second_placement
   #   y_first_placement(random_num)
   #   y_second_placement(random_num)
   #   y_third_placement(random_num)
+    ship_one_first_placement(random_num)
+    ship_one_second_placement
+    binding.pry
   end
 
-  def x_first_placement(selection)
+  def ship_one_first_placement(selection)
     @ship_one_key = selection[0]
     @board[selection[0]][selection[1].to_i] = "x1"
     @previous_placement = selection
@@ -37,21 +41,25 @@ class Computer
   end
 
   def placement_options
-    lookup = {
+    @options = create_vertical_options + create_horiz_options
+  end
+  
+  def create_vertical_options
+    valid_keys = {
       'a' => ['b'],
       'b' => ['a', 'c'],
       'c' => ['b', 'd'],
       'd' => ['c']
     }
     
-    vertical_options = lookup[@previous_placement[0]].map { |key| key + @previous_placement[1] }
-    horiz_options = calculate_horizontal_options.map { |index| @previous_placement[0] + index }
-    
-    options = vertical_options + horiz_options
-    binding.pry
+    valid_keys[@previous_placement[0]].map { |key| key + @previous_placement[1] }
   end
   
-  def calculate_horizontal_options
+  def create_horiz_options
+    determine_valid_indeces.map { |index| @previous_placement[0] + index }
+  end
+  
+  def determine_valid_indeces
     if @previous_placement[1] == '1'
       ['2']
     elsif @previous_placement[1] == '4'
@@ -61,6 +69,11 @@ class Computer
       indeces << (@previous_placement[1].to_i + 1).to_s
       indeces << (@previous_placement[1].to_1 - 1).to_s
     end
+  end
+  
+  def ship_one_second_placement
+    selection = @options.sample
+    @board[selection[0]][selection[1].to_i] = 'x2'
   end
 
   # def x_second_placement(selection_two)
