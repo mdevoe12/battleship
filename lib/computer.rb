@@ -21,12 +21,12 @@ class Computer
   end
 
   def run
-    wipe_board
+    # wipe_board
     x_first_placement(random_num)
     x_second_placement(random_num)
-    y_first_placement(random_num)
-    y_second_placement(random_num)
-    y_third_placement(random_num)
+  #   y_first_placement(random_num)
+  #   y_second_placement(random_num)
+  #   y_third_placement(random_num)
   end
 
   def x_first_placement(selection)
@@ -37,143 +37,154 @@ class Computer
   end
 
   def placement_options
-    previous_key = @previous_placement[0]
-    previous_index = @previous_placement[1]
+    lookup = {
+      'a' => ['b'],
+      'b' => ['a', 'c'],
+      'c' => ['b', 'd'],
+      'd' => ['c']
+    }
     
-    key_options = []
-    key_options << @board.key([(previous_key.ord + 1).chr]) 
-    key_options << @board.key([(previous_key.ord - 1).chr])
+    vertical_options = lookup[@previous_placement[0]].map { |key| key + @previous_placement[1] }
+    horiz_options = calculate_horizontal_options.map { |index| @previous_placement[0] + index }
     
-    key_options.map { |key| key if @board.keys.include?(key) }
-    
-    index_options = []
-    index_options << previous_index.to_i + 1
-    index_options << previous_index.to_i - 1
-    
+    options = vertical_options + horiz_options
+    binding.pry
   end
-
-  def x_second_placement(selection_two)
-      if  @board[selection_two[0]][selection_two[1].to_i] != ""
-          @random_tries += 1
-          check_random_tries
-          x_second_placement(random_num)
-    elsif selection_two[0] == @previous_placement[0]
-        if previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == -1
-          @board[selection_two[0]][selection_two[1].to_i] = "x2"
-        elsif previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == 1
-          @board[selection_two[0]][selection_two[1].to_i] = "x2"
-        else
-          @random_tries += 1
-          check_random_tries
-          x_second_placement(random_num)
-        end
-    elsif selection_two[1] == previous_ship_placement("x1")[1]
-      if  previous_ship_placement("x1")[0].ord - selection_two[0].ord == -1
-          @board[selection_two[0]][selection_two[1].to_i] = "x2"
-      elsif previous_ship_placement("x1")[0].ord - selection_two[0].ord == 1
-          @board[selection_two[0]][selection_two[1].to_i] = "x2"
-      else
-          @random_tries += 1
-          check_random_tries
-          x_second_placement(random_num)
-      end
+  
+  def calculate_horizontal_options
+    if @previous_placement[1] == '1'
+      ['2']
+    elsif @previous_placement[1] == '4'
+      ['3']
     else
-          @random_tries += 1
-          check_random_tries
-          x_second_placement(random_num)
+      indeces = []
+      indeces << (@previous_placement[1].to_i + 1).to_s
+      indeces << (@previous_placement[1].to_1 - 1).to_s
     end
   end
 
+  # def x_second_placement(selection_two)
+  #     if  @board[selection_two[0]][selection_two[1].to_i] != ""
+  #         @random_tries += 1
+  #         check_random_tries
+  #         x_second_placement(random_num)
+  #   elsif selection_two[0] == @previous_placement[0]
+  #       if previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == -1
+  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
+  #       elsif previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == 1
+  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
+  #       else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         x_second_placement(random_num)
+  #       end
+  #   elsif selection_two[1] == previous_ship_placement("x1")[1]
+  #     if  previous_ship_placement("x1")[0].ord - selection_two[0].ord == -1
+  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
+  #     elsif previous_ship_placement("x1")[0].ord - selection_two[0].ord == 1
+  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
+  #     else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         x_second_placement(random_num)
+  #     end
+  #   else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         x_second_placement(random_num)
+  #   end
+  # end
+  # 
+  # 
+  # def y_first_placement(selection_three)
+  #   if @board[selection_three[0]][selection_three[1].to_i] == ""
+  #       @board[selection_three[0]][selection_three[1].to_i] = "y1"
+  #   else
+  #       @random_tries += 1
+  #       check_random_tries
+  #       y_first_placement(random_num)
+  #   end
+  # end
+  # 
+  # 
+  # def y_second_placement(selection_four)
+  #   if    @board[selection_four[0]][selection_four[1].to_i] != ""
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_second_placement(random_num)
+  #   elsif (selection_four[0] == previous_ship_placement("y1")[0])
+  #       if previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == -1
+  #         @board[selection_four[0]][selection_four[1].to_i] = "y2"
+  #       elsif previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == 1
+  #         @board[selection_four[0]][selection_four[1].to_i] = "y2"
+  #       else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_second_placement(random_num)
+  #       end
+  #   elsif (selection_four[1] == previous_ship_placement("y1")[1])
+  #     if  previous_ship_placement("y1")[0].ord - selection_four[0].ord == -1
+  #         @board[selection_four[0]][selection_four[1].to_i] = "y2"
+  #     elsif previous_ship_placement("y1")[0].ord - selection_four[0].ord == 1
+  #         @board[selection_four[0]][selection_four[1].to_i] = "y2"
+  #     else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_second_placement(random_num)
+  #     end
+  #   else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_second_placement(random_num)
+  #   end
+  # end
+  # 
+  # 
+  # def y_third_placement(selection_five)
+  #   if  @board[selection_five[0]][selection_five[1].to_i] != ""
+  #       @random_tries += 1
+  #       check_random_tries
+  #       y_third_placement(random_num)
+  #   elsif  (selection_five[0] == previous_ship_placement("y2")[0]) &&
+  #          ((previous_ship_placement("y1"))[0] == selection_five[0])
+  #       if (previous_ship_placement("y2")[1].to_i - selection_five[1].to_i == -1)
+  #          @board[selection_five[0]][selection_five[1].to_i] = "y3"
+  #       elsif (previous_ship_placement("y2")[1].to_i - selection_five[1].to_i == 1)
+  #          @board[selection_five[0]][selection_five[1].to_i] = "y3"
+  #       else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_third_placement(random_num)
+  #       end
+  #   elsif (selection_five[1] == previous_ship_placement("y2")[1]) &&
+  #       ((previous_ship_placement("y1"))[1] == selection_five[1])
+  #     if (previous_ship_placement("y2")[0].ord - selection_five[0].ord == -1)
+  #        @board[selection_five[0]][selection_five[1].to_i] = "y3"
+  #     elsif (previous_ship_placement("y2")[0].ord - selection_five[0].ord == 1)
+  #        @board[selection_five[0]][selection_five[1].to_i] = "y3"
+  #     else
+  #         @random_tries += 1
+  #         check_random_tries
+  #         y_third_placement(random_num)
+  #     end
+  #   else
+  #       @random_tries += 1
+  #       check_random_tries
+  #       y_third_placement(random_num)
+  #   end
+  # end
 
-  def y_first_placement(selection_three)
-    if @board[selection_three[0]][selection_three[1].to_i] == ""
-        @board[selection_three[0]][selection_three[1].to_i] = "y1"
-    else
-        @random_tries += 1
-        check_random_tries
-        y_first_placement(random_num)
-    end
-  end
 
-
-  def y_second_placement(selection_four)
-    if    @board[selection_four[0]][selection_four[1].to_i] != ""
-          @random_tries += 1
-          check_random_tries
-          y_second_placement(random_num)
-    elsif (selection_four[0] == previous_ship_placement("y1")[0])
-        if previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == -1
-          @board[selection_four[0]][selection_four[1].to_i] = "y2"
-        elsif previous_ship_placement("y1")[1].to_i - selection_four[1].to_i == 1
-          @board[selection_four[0]][selection_four[1].to_i] = "y2"
-        else
-          @random_tries += 1
-          check_random_tries
-          y_second_placement(random_num)
-        end
-    elsif (selection_four[1] == previous_ship_placement("y1")[1])
-      if  previous_ship_placement("y1")[0].ord - selection_four[0].ord == -1
-          @board[selection_four[0]][selection_four[1].to_i] = "y2"
-      elsif previous_ship_placement("y1")[0].ord - selection_four[0].ord == 1
-          @board[selection_four[0]][selection_four[1].to_i] = "y2"
-      else
-          @random_tries += 1
-          check_random_tries
-          y_second_placement(random_num)
-      end
-    else
-          @random_tries += 1
-          check_random_tries
-          y_second_placement(random_num)
-    end
-  end
-
-
-  def y_third_placement(selection_five)
-    if  @board[selection_five[0]][selection_five[1].to_i] != ""
-        @random_tries += 1
-        check_random_tries
-        y_third_placement(random_num)
-    elsif  (selection_five[0] == previous_ship_placement("y2")[0]) &&
-           ((previous_ship_placement("y1"))[0] == selection_five[0])
-        if (previous_ship_placement("y2")[1].to_i - selection_five[1].to_i == -1)
-           @board[selection_five[0]][selection_five[1].to_i] = "y3"
-        elsif (previous_ship_placement("y2")[1].to_i - selection_five[1].to_i == 1)
-           @board[selection_five[0]][selection_five[1].to_i] = "y3"
-        else
-          @random_tries += 1
-          check_random_tries
-          y_third_placement(random_num)
-        end
-    elsif (selection_five[1] == previous_ship_placement("y2")[1]) &&
-        ((previous_ship_placement("y1"))[1] == selection_five[1])
-      if (previous_ship_placement("y2")[0].ord - selection_five[0].ord == -1)
-         @board[selection_five[0]][selection_five[1].to_i] = "y3"
-      elsif (previous_ship_placement("y2")[0].ord - selection_five[0].ord == 1)
-         @board[selection_five[0]][selection_five[1].to_i] = "y3"
-      else
-          @random_tries += 1
-          check_random_tries
-          y_third_placement(random_num)
-      end
-    else
-        @random_tries += 1
-        check_random_tries
-        y_third_placement(random_num)
-    end
-  end
-
-
-  def previous_ship_placement(input)
-    @board.each do |key, row|
-      row.find do |index|
-        if index == input
-          @previous_placement = key + row.index(index).to_s
-        end
-      end
-    end
-    @previous_placement
-  end
+  # def previous_ship_placement(input)
+  #   @board.each do |key, row|
+  #     row.find do |index|
+  #       if index == input
+  #         @previous_placement = key + row.index(index).to_s
+  #       end
+  #     end
+  #   end
+  #   @previous_placement
+  # end
 
   def random_num
     random_number = ""
@@ -182,12 +193,12 @@ class Computer
     random_number = letter_gen.sample + num_gen.to_s
   end
 
-  def check_random_tries
-    if @random_tries == 100
-      @random_tries = 0
-      run
-    end
-  end
+  # def check_random_tries
+  #   if @random_tries == 100
+  #     @random_tries = 0
+  #     run
+  #   end
+  # end
 
   def wipe_board
     @board = EMPTY_BOARD
