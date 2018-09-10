@@ -15,10 +15,7 @@ class Computer
   def initialize
     @board = EMPTY_BOARD
     @previous_placement = ""
-    @random_tries = 0
     @options = []
-    @ship_one_key = ''
-    @ship_two_key = ''
   end
 
   def run
@@ -30,11 +27,11 @@ class Computer
   #   y_third_placement(random_num)
     ship_one_first_placement(random_num)
     ship_one_second_placement
+    ship_two_first_placement(random_num)
     binding.pry
   end
 
   def ship_one_first_placement(selection)
-    @ship_one_key = selection[0]
     @board[selection[0]][selection[1].to_i] = "x1"
     @previous_placement = selection
     placement_options
@@ -75,40 +72,19 @@ class Computer
     selection = @options.sample
     @board[selection[0]][selection[1].to_i] = 'x2'
   end
+  
+  def ship_two_first_placement(selection)
+    validate_selection(selection)
+    # @board[selection[0][selection][1]] = 'y1' if @board[selection[0]][selection[1]] == ''
+  end
+  
+  def validate_selection(selection)
+    key = selection[0]
+    index = selection[1].to_i
+    
+    
+  end
 
-  # def x_second_placement(selection_two)
-  #     if  @board[selection_two[0]][selection_two[1].to_i] != ""
-  #         @random_tries += 1
-  #         check_random_tries
-  #         x_second_placement(random_num)
-  #   elsif selection_two[0] == @previous_placement[0]
-  #       if previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == -1
-  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
-  #       elsif previous_ship_placement("x1")[1].to_i - selection_two[1].to_i == 1
-  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
-  #       else
-  #         @random_tries += 1
-  #         check_random_tries
-  #         x_second_placement(random_num)
-  #       end
-  #   elsif selection_two[1] == previous_ship_placement("x1")[1]
-  #     if  previous_ship_placement("x1")[0].ord - selection_two[0].ord == -1
-  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
-  #     elsif previous_ship_placement("x1")[0].ord - selection_two[0].ord == 1
-  #         @board[selection_two[0]][selection_two[1].to_i] = "x2"
-  #     else
-  #         @random_tries += 1
-  #         check_random_tries
-  #         x_second_placement(random_num)
-  #     end
-  #   else
-  #         @random_tries += 1
-  #         check_random_tries
-  #         x_second_placement(random_num)
-  #   end
-  # end
-  # 
-  # 
   # def y_first_placement(selection_three)
   #   if @board[selection_three[0]][selection_three[1].to_i] == ""
   #       @board[selection_three[0]][selection_three[1].to_i] = "y1"
