@@ -21,7 +21,6 @@ class Computer
   def run
     ship_one_first_placement(random_num)
     ship_one_second_placement
-    ship_two_first_placement(random_num)
     binding.pry
   end
 
@@ -36,10 +35,14 @@ class Computer
     @board[selection[0]][selection[1].to_i] = 'x2'
   end
 
-  def ship_two_first_placement(selection)
-    validate_selection(selection)
+  def validate_selection(selection)
+    key = selection[0]
+    index = selection[1].to_i
+    
+    placement_options
+    binding.pry
   end
-
+  
   def placement_options
     @options = create_vertical_options + create_horiz_options
   end
@@ -71,16 +74,7 @@ class Computer
     end
   end
 
-  def validate_selection(selection)
-    key = selection[0]
-    index = selection[1].to_i
-
-    placement_options
-    binding.pry
-  end
-
-
-  def random_num
+  def random_placement
     random_number = ""
     num_gen = rand(1..4)
     letter_gen = ["a", "b", "c", "d"]
