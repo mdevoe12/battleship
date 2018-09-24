@@ -14,19 +14,23 @@ class Computer
 
   def initialize
     @board = EMPTY_BOARD
-    @previous_placement = ""
+    @previous_placement_key = ""
+    @previous_placement_index = 0
     @options = []
   end
 
   def run
-    ship_one_first_placement(random_num)
+    ship_one_first_placement(random_placement)
     ship_one_second_placement
     binding.pry
   end
 
   def ship_one_first_placement(selection)
-    @board[selection[0]][selection[1].to_i] = "x1"
-    @previous_placement = selection
+    key = selection[0]
+    index = selection[1].to_i
+    @board[key][index] = "x1"
+    @previous_placement_key = key
+    @previous_placement_index = index
     placement_options
   end
 
@@ -55,22 +59,22 @@ class Computer
       'd' => ['c']
     }
 
-    valid_keys[@previous_placement[0]].map { |key| key + @previous_placement[1] }
+    valid_keys[@previous_placement_key].map { |key| key + @previous_placement_index }
   end
 
   def create_horiz_options
-    determine_valid_indeces.map { |index| @previous_placement[0] + index }
+    determine_valid_indeces.map { |index| @previous_placement_key + index }
   end
 
   def determine_valid_indeces
-    if @previous_placement[1] == '1'
+    if @previous_placement_index == 1
       ['2']
-    elsif @previous_placement[1] == '4'
+    elsif @previous_placement_index == 4
       ['3']
     else
       indeces = []
-      indeces << (@previous_placement[1].to_i + 1).to_s
-      indeces << (@previous_placement[1].to_i - 1).to_s
+      indeces << (@previous_placement_index + 1).to_s
+      indeces << (@previous_placement_index - 1).to_s
     end
   end
 
