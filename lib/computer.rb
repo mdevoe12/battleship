@@ -42,11 +42,11 @@ class Computer
   def validate_selection(selection)
     key = selection[0]
     index = selection[1].to_i
-    
+
     placement_options
     binding.pry
   end
-  
+
   def placement_options
     @options = create_vertical_options + create_horiz_options
   end
@@ -59,11 +59,11 @@ class Computer
       'd' => ['c']
     }
 
-    valid_keys[@previous_placement_key].map { |key| key + @previous_placement_index }
+    valid_keys[@previous_placement_key].map { |key| key + @previous_placement_index.to_s }
   end
 
   def create_horiz_options
-    determine_valid_indeces.map { |index| @previous_placement_key + index }
+    determine_valid_indeces.map { |index| @previous_placement_key + index.to_s }
   end
 
   def determine_valid_indeces
@@ -79,10 +79,9 @@ class Computer
   end
 
   def random_placement
-    random_number = ""
     num_gen = rand(1..4)
     letter_gen = ["a", "b", "c", "d"]
-    random_number = letter_gen.sample + num_gen.to_s
+    letter_gen.sample + num_gen.to_s
   end
 
   def wipe_board
