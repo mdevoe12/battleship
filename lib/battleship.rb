@@ -11,23 +11,6 @@ class Battleship
 
   Game.new.call
 
-  def start_sequence
-    puts
-    puts "Would you like to (p)lay, read the (i)instructions or (q)uit?"
-    puts
-    choice = gets.chomp.downcase
-    if    choice == "i" || choice == "instructions"
-          instructions
-    elsif choice == "p" || choice == "play"
-          play
-    elsif choice == "q" || choice == "quit"
-          quit
-    else
-          puts "That's not a valid choice, please choose again."
-          start_sequence
-    end
-  end
-
   def quit
     puts `clear`
     puts
@@ -204,37 +187,6 @@ class Battleship
     puts
     puts row_d
     puts "============================="
-  end
-
-  def instructions_text
-    puts `clear`
-    puts "====================================================================="
-    puts "BATTLESHIP: The Next Generation is an intense test simulation for "
-    puts "battling the Klingon threat. If you choose to (p)lay, the Klingons"
-    puts "will automatically place their two-ship fleet on a 4x4 grid."
-    puts "One of their ships will hold two places on the 4x4 grid."
-    puts "The second ship will hold three places on the 4x4 grid."
-    puts
-    puts "After the Klingons place their ships, you will be asked to place"
-    puts "your ships on 4x4 grid. The grid corresponds to a letter and a number"
-    puts "placement. For example, a1 will place the first spot of a ship in the"
-    puts "top left corner of the 4x4 board."
-    puts
-    puts "All ship placements must be placed horizontally or vertically on the"
-    puts "board. If the placecment is invalid, the simulation will tell you to"
-    puts "choose again. After all ships are placed, the battle will begin."
-    puts
-    puts "Once the battle starts, you will asked to fire a proton torpedo at"
-    puts "the Klingon's fleet. To do so, enter a valid coordinate on the 4x4"
-    puts "grid. These coordinates will also conform to a a-d, 1-4 match."
-    puts
-    puts "As you fire shots, the Klingons will as well. You'll see an updated"
-    puts "battle map with your hits (H) or a miss (M)."
-    puts
-    puts "The battle is over when one of the fleets are destroyed."
-    puts
-    puts "Good luck, Captain."
-    puts "====================================================================="
   end
 end
 
