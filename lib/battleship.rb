@@ -1,22 +1,15 @@
 require './lib/computer'
 require './lib/player'
+require './lib/text'
+require './lib/game'
 
 class Battleship
-
   def initialize
     @shot_counter = 0
     @start_time = Time.now
   end
 
-puts "=========================================="
-puts "Welcome to BATTLESHIP: The Next Generation"
-puts "=========================================="
-puts
-puts "What is your name?"
-name = gets.chomp
-puts "Hello Captain #{name}, I'm Commander Data."
-puts "I'll be your guide during our battle with the Klingons"
-puts
+  Game.new.call
 
   def start_sequence
     puts
