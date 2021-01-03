@@ -1,4 +1,10 @@
-class Text
+class Output
+  def call(text, args = nil)
+    puts `clear`
+
+    puts public_send(text)
+  end
+
   def game_intro
     puts '
       ========================
@@ -21,9 +27,7 @@ class Text
   end
   
   def instructions_text
-    puts `clear`
-    
-    puts "=====================================================================
+    "=====================================================================
       BATTLESHIP: The Next Generation is an intense test simulation for
       battling the Klingon threat. If you choose to (p)lay, the Klingons
       will automatically place their two-ship fleet on a 4x4 grid.
