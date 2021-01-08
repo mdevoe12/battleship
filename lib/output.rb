@@ -14,6 +14,10 @@ class Output
     '
   end
 
+  def invalid_choice
+    puts "that's not a valid choice, please choose again"
+  end
+
   def welcome(name)
     puts "Hello Captain #{name}, I'm Commander Data.
       I'll be your guide during our battle with the Klingons"
