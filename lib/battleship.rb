@@ -1,5 +1,3 @@
-require './lib/computer'
-require './lib/player'
 require './lib/output'
 require './lib/game'
 
