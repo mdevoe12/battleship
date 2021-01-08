@@ -51,7 +51,7 @@ class Battleship
   end
 
   def play
-    game.new.call
+    game.new(output: output).call
   end
 
   def end_game
