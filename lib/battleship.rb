@@ -14,8 +14,9 @@ class Battleship
   end
 
   def call
-    output.call('game_intro')
-    output.call('user_input')
+    output.game_intro
+    output.welcome(user_input)
+
     start_sequence
   end
 
@@ -28,28 +29,26 @@ class Battleship
   end
 
   def start_sequence
-    output.call('options')
+    output.options
 
-    choice = gets.chomp.downcase
+    choice = user_input.downcase
     case choice
     when 'i' then instructions
     when 'p' then play
     when 'q' then quit
     else
-      puts "That's not a valid choice, please choose again."
-      start sequence
+      output.invalid_choice
+      start_sequence
     end
   end
 
   def instructions
-    output.call('instructions_text')
+    output.instructions_text
     start_sequence
   end
 
   def quit
-    puts `clear`
-    puts
-    puts "Come back when you're ready to battle the Klingons."
+    output.quit
     end_game
   end
 
@@ -58,9 +57,7 @@ class Battleship
   end
 
   def end_game
-    puts "
-      Thanks for playing BATTLESHIP: The Next Generation
-    "
+    output.end_game
     exit
   end
 end
