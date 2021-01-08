@@ -1,62 +1,57 @@
-require './lib/game.rb'
-require './lib/player.rb'
-require './lib/computer.rb'
+require './lib/game'
+require './lib/player'
+require './lib/computer'
 
 class Game
-  def initialize
+  def initialize(output: Output.new)
     @shot_counter = 0
     @start_time = Time.now
+    @computer_player = Computer.new
+    @human_player = Player.new
+    @output = output
   end
 
   def call
-    puts `clear`
-    puts
-    puts "================"
-    puts "  E-N-G-A-G-E   "
-    puts "================"
-    @computer_player = Computer.new
-    @computer_player.run
-    @human_player = Player.new
-    @human_player.run
-    @start_time
+    output.engage
+    computer_player.run
+    human_player.run
     request_shot
   end
 
+  private
+
+  attr_reader :computer_player, :human_player, :output
+
   def request_shot
-    puts "please enter your shot coordinates"
+    output.shot_request
     shot = gets.chomp.downcase
-    puts `clear`
+    output.clear
     player_check(shot)
   end
 
   def player_check(shot)
-    if    ((shot[0].ord > 100) || (shot[0].ord < 97))
-          p "Your selection is off the grid, please choose again."
-          request_shot
+    if (shot[0].ord > 100) || (shot[0].ord < 97)
+      output.shot_request_off_grid
+      request_shot
     elsif (shot[1].to_i < 1) || (shot[1].to_i > 4)
-          p "Your selection is off the grid, please choose again."
-          request_shot
-    elsif @computer_player.board[shot[0]][shot[1].to_i] == ""
-          @computer_player.board[shot[0]][shot[1].to_i] = "M"
-          puts
-          puts "Your photon torpedo missed!"
-          puts
-          @shot_counter += 1
+      output.shot_request_off_grid
+      request_shot
+    elsif @computer_player.board[shot[0]][shot[1].to_i] == ''
+      @computer_player.board[shot[0]][shot[1].to_i] = 'M'
+      output.shot_missed
+      @shot_counter += 1
     elsif (@computer_player.board[shot[0]][shot[1].to_i].include?("x")) ||
           (@computer_player.board[shot[0]][shot[1].to_i].include?("y"))
-           @computer_player.board[shot[0]][shot[1].to_i] = "H"
-          puts
-          puts "It's a hit!"
-          puts
-          @shot_counter += 1
+      @computer_player.board[shot[0]][shot[1].to_i] = 'H'
+      output.shot_hit
+      @shot_counter += 1
     else
-          puts "Not a valid selection, please choose again."
-          request_shot
+      output.invalid_choice
+      request_shot
     end
+
     ship_status(@computer_player)
-    puts
-    puts "The Klingons are shooting! Brace for impact!!!"
-    puts
+    output.shot_incoming
     display_board
     computer_shot
   end

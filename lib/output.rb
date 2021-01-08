@@ -14,8 +14,18 @@ class Output
     '
   end
 
+  def engage
+    clear
+
+    puts "
+      ================
+        E-N-G-A-G-E
+      ================
+    "
+  end
+
   def invalid_choice
-    puts "that's not a valid choice, please choose again"
+    puts 'Invalid choice, please choose again'
   end
 
   def welcome(name)
@@ -33,6 +43,32 @@ class Output
 
   def end_game
     puts 'Thanks for playing BATTLESHIP: The Next Generation'
+  end
+
+  def shot_incoming
+    puts '
+      The Klingons are shooting! Brace for impact!!! 
+    '
+  end
+
+  def shot_hit
+    puts '
+      Photon torpedo hit! 
+    '
+  end
+
+  def shot_missed
+    puts '
+      Your photon torpedo missed!
+    '
+  end
+
+  def shot_request
+    puts 'Enter your shot coordinates'
+  end
+
+  def shot_request_off_grid
+    puts 'Your selection is off the grid, choose again'
   end
 
   def instructions_text
