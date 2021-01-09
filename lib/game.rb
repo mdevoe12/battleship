@@ -62,27 +62,19 @@ class Game
   end
 
   def computer_check(shot)
-    if    @human_player.board[shot[0]][shot[1].to_i] == ""
-          @human_player.board[shot[0]][shot[1].to_i] = "M"
-          puts
-          puts "The Klingons missed your fleet!"
-          puts
-    elsif (@human_player.board[shot[0]][shot[1].to_i].include?("x")) ||
-          (@human_player.board[shot[0]][shot[1].to_i].include?("y"))
-           @human_player.board[shot[0]][shot[1].to_i] = "H"
-          puts
-          puts "Warning: Klingons hit one of your ships!"
-          puts
+    if    @human_player.board[shot[0]][shot[1].to_i] == ''
+      @human_player.board[shot[0]][shot[1].to_i] = 'M'
+      output.incoming_shot_missed
+    elsif @human_player.board[shot[0]][shot[1].to_i].include?('x') ||
+          @human_player.board[shot[0]][shot[1].to_i].include?('y')
+      @human_player.board[shot[0]][shot[1].to_i] = 'H'
+      output.incoming_shot_hit
     else
-          puts
-          puts "Not a valid selection, please choose again."
-          puts
-          computer_shot
+      output.invalid_choice
+      computer_shot
     end
     ship_status(@human_player)
-    puts
-    puts "It's time to return fire, prep photon torpedos!"
-    puts
+    output.return_fire
     request_shot
   end
 
@@ -133,9 +125,9 @@ class Game
   end
 
   def random_num
-    random_number = ""
+    random_number = ''
     num_gen = (1..4)
-    letter_gen = ["a", "b", "c", "d"]
+    letter_gen = ['a', 'b', 'c', 'd']
     random_number = letter_gen.sample + rand(num_gen).to_s
   end
 

@@ -47,13 +47,25 @@ class Output
 
   def shot_incoming
     puts '
-      The Klingons are shooting! Brace for impact!!! 
+      The Klingons are shooting! Brace for impact!!!
     '
+  end
+
+  def return_fire
+    puts 'Time to return fire, prep photon torpedos!'
+  end
+
+  def incoming_shot_missed
+    puts 'The Klingons missed your fleet!'
+  end
+
+  def incoming_shot_hit
+    puts 'WARNING: Klingons hit one of your ships!'
   end
 
   def shot_hit
     puts '
-      Photon torpedo hit! 
+      Photon torpedo hit!
     '
   end
 
