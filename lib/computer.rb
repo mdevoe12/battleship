@@ -5,8 +5,8 @@ class Computer
   attr_reader :previous_ship_placement,
               :board
 
-  def initialize
-    @board = Board.new.board
+  def initialize(layout:)
+    @board = layout
     @previous_placement = ""
     @random_tries = 0
   end
