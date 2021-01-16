@@ -9,6 +9,7 @@ class Game
     @computer_player = Computer.new
     @human_player = Player.new
     @output = output
+    @board = Board.new
   end
 
   def call
