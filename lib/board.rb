@@ -1,11 +1,15 @@
 class Board
+  LAYOUT = {
+    "a" => [nil, "", "", "", ""],
+    "b" => [nil, "", "", "", ""],
+    "c" => [nil, "", "", "", ""],
+    "d" => [nil, "", "", "", ""]
+  }
 
-  attr_reader :board
+  attr_reader :player_side, :computer_side
 
   def initialize
-    @board = {"a" => [nil, "", "", "", ""],
-              "b" => [nil, "", "", "", ""],
-              "c" => [nil, "", "", "", ""],
-              "d" => [nil, "", "", "", ""]}
+    @player_side = LAYOUT
+    @computer_side = LAYOUT
   end
 end
