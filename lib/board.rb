@@ -9,7 +9,7 @@ class Board
   attr_reader :player_side, :computer_side
 
   def initialize
-    @player_side = LAYOUT
-    @computer_side = LAYOUT
+    @player_side = LAYOUT.clone
+    @computer_side = LAYOUT.clone
   end
 end
