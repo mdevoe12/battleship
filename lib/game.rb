@@ -1,15 +1,18 @@
 require './lib/game'
 require './lib/player'
 require './lib/computer'
+require './lib/board'
 
 class Game
-  def initialize(output: Output.new)
+  BOARD = Board.new
+
+  def initialize(output: Output.new, board: BOARD)
     @shot_counter = 0
     @start_time = Time.now
-    @computer_player = Computer.new
-    @human_player = Player.new
+    @computer_player = Computer.new(layout: board.computer_side)
+    @human_player = Player.new(layout: board.player_side)
     @output = output
-    @board = Board.new
+    @board = board
   end
 
   def call
@@ -21,7 +24,7 @@ class Game
 
   private
 
-  attr_reader :computer_player, :human_player, :output
+  attr_reader :computer_player, :human_player, :output, :board
 
   def request_shot
     output.shot_request
