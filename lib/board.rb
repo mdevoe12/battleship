@@ -1,5 +1,3 @@
-require './lib/side.rb'
-
 class Board
   attr_reader :player_side, :computer_side
 
