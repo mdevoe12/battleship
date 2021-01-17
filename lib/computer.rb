@@ -174,6 +174,4 @@ class Computer
       end
     end
   end
-
-
 end
