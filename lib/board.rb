@@ -1,11 +1,19 @@
 class Board
-
-  attr_reader :board
+  attr_reader :player_side, :computer_side
 
   def initialize
-    @board = {"a" => [nil, "", "", "", ""],
-              "b" => [nil, "", "", "", ""],
-              "c" => [nil, "", "", "", ""],
-              "d" => [nil, "", "", "", ""]}
+    @player_side = layout
+    @computer_side = layout
+  end
+
+  private
+
+  def layout
+    {
+      "a" => [nil, "", "", "", ""],
+      "b" => [nil, "", "", "", ""],
+      "c" => [nil, "", "", "", ""],
+      "d" => [nil, "", "", "", ""]
+    }
   end
 end
