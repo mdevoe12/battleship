@@ -1,7 +1,6 @@
 require './lib/board'
 
 class Computer
-
   attr_reader :previous_ship_placement,
               :board
 
