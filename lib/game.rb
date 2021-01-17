@@ -2,6 +2,7 @@ require './lib/game'
 require './lib/player'
 require './lib/computer'
 require './lib/board'
+require 'pry'
 
 class Game
   BOARD = Board.new
@@ -16,6 +17,7 @@ class Game
   end
 
   def call
+    binding.pry
     output.engage
     computer_player.run
     human_player.run

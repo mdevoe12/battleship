@@ -1,15 +1,10 @@
-class Board
-  LAYOUT = {
-    "a" => [nil, "", "", "", ""],
-    "b" => [nil, "", "", "", ""],
-    "c" => [nil, "", "", "", ""],
-    "d" => [nil, "", "", "", ""]
-  }
+require './lib/side.rb'
 
+class Board
   attr_reader :player_side, :computer_side
 
   def initialize
-    @player_side = LAYOUT.clone
-    @computer_side = LAYOUT.clone
+    @player_side = Side.new.layout
+    @computer_side = Side.new.layout
   end
 end
