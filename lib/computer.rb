@@ -1,5 +1,3 @@
-require './lib/board'
-
 class Computer
   attr_reader :previous_ship_placement,
               :board
@@ -151,7 +149,6 @@ class Computer
     random_number = ""
     num_gen = rand(1..4)
     letter_gen = ["a", "b", "c", "d"]
-    # binding.pry
     random_number = letter_gen.sample + num_gen.to_s
   end
 
