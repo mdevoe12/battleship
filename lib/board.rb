@@ -2,13 +2,13 @@ class Board
   attr_reader :player_side, :computer_side
 
   def initialize
-    @player_side = layout
-    @computer_side = layout
+    @player_side = Board.layout
+    @computer_side = Board.layout
   end
 
   private
 
-  def layout
+  def self.layout
     {
       "a" => [nil, "", "", "", ""],
       "b" => [nil, "", "", "", ""],
