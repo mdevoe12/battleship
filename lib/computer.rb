@@ -1,6 +1,8 @@
 require './lib/board'
 
 class Computer
+  ROWS = %w[a b c d].freeze
+
   attr_accessor :board, :random_tries, :previous_placement
 
   def initialize(layout:)
@@ -143,10 +145,9 @@ class Computer
   end
 
   def random_num
-    letter_gen = %w[a b c d]
     num_gen = rand(1..4)
 
-    letter_gen.sample + num_gen.to_s
+    ROWS.sample + num_gen.to_s
   end
 
   def check_random_tries
