@@ -17,7 +17,7 @@ class Computer
     wipe_board
     x_first_placement(random_row, random_column)
     x_second_placement(random_row, random_column)
-    # y_first_placement(random_num)
+    y_first_placement(random_row, random_column)
     # y_second_placement(random_num)
     # y_third_placement(random_num)
   end
@@ -58,15 +58,19 @@ class Computer
     board[row][column] = 'x2'
   end
 
-  # def y_first_placement(selection)
-  #   if selection_empty?(selection)
-  #     board[selection[0]][selection[1].to_i] = 'y1'
-  #   else
-  #     increment_tries
-  #     check_random_tries
-  #     y_first_placement(random_num)
-  #   end
-  # end
+  def y_first_placement(row, column)
+    retry_y_first_placement unless selection_empty?(row, column)
+
+    board[row][column] = 'y1'
+    self.previous_row = row
+    self.previous_column = column
+  end
+
+  def retry_y_first_placement
+    increment_tries
+    check_random_tries
+    y_first_placement(random_row, random_column)
+  end
 
   # def y_second_placement(selection)
   #   if !selection_empty?(selection)
