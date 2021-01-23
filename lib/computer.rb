@@ -21,7 +21,10 @@ class Computer
   end
 
   def x_first_placement(selection)
-    board[selection[0]][selection[1].to_i] = 'x1'
+    row = selection[0]
+    column = selection[1].to_i
+
+    board[row][column] = 'x1'
 
     self.previous_placement = selection
   end
