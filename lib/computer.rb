@@ -18,7 +18,7 @@ class Computer
     x_first_placement(random_row, random_column)
     x_second_placement(random_row, random_column)
     y_first_placement(random_row, random_column)
-    # y_second_placement(random_num)
+    y_second_placement(random_row, random_column)
     # y_third_placement(random_num)
   end
 
@@ -75,25 +75,15 @@ class Computer
   def y_second_placement(row, column)
     retry_y_second_placement unless selection_empty?(row, column)
 
-    if row == previous_row
-      if previous_column - column == -1
-        board[row][column] = 'y2'
-      elsif previous_column - column == 1
-        board[row][column] = 'y2'
-      else
-        retry_y_second_placement
-      end
-    elsif column == previous_column
-      if previous_row.ord - row.ord == -1
-        board[row][column] = 'y2'
-      elsif previous_row.ord - row.ord == 1
-        board[row][column] = 'y2'
-      else
-        retry_y_second_placement
-      end
-    else
-      retry_y_second_placement
-    end
+    result = get_result_range(row, column)
+
+    [-1, 1].include?(result) ? set_y_2(row, column) : retry_y_second_placement
+  end
+
+  def set_y_2(row, column)
+    board[row][column] = 'y2'
+    self.previous_row = row
+    self.previous_column = column
   end
 
   def retry_y_second_placement
