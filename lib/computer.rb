@@ -92,39 +92,43 @@ class Computer
     y_second_placement(random_row, random_column)
   end
 
-  # def y_third_placement(selection)
-  #   if !selection_empty?(selection)
-  #     increment_tries
-  #     check_random_tries
-  #     y_third_placement(random_num)
-  #   elsif (selection[0] == previous_ship_placement('y2')[0]) &&
-  #         (previous_ship_placement('y1')[0] == selection[0])
-  #     if previous_ship_placement('y2')[1].to_i - selection[1].to_i == -1
-  #       board[selection[0]][selection[1].to_i] = 'y3'
-  #     elsif previous_ship_placement('y2')[1].to_i - selection[1].to_i == 1
-  #       @board[selection[0]][selection[1].to_i] = 'y3'
-  #     else
-  #       increment_tries
-  #       check_random_tries
-  #       y_third_placement(random_num)
-  #     end
-  #   elsif (selection[1] == previous_ship_placement('y2')[1]) &&
-  #         (previous_ship_placement('y1')[1] == selection[1])
-  #     if previous_ship_placement('y2')[0].ord - selection[0].ord == -1
-  #       board[selection[0]][selection[1].to_i] = 'y3'
-  #     elsif previous_ship_placement('y2')[0].ord - selection[0].ord == 1
-  #       board[selection[0]][selection[1].to_i] = 'y3'
-  #     else
-  #       increment_tries
-  #       check_random_tries
-  #       y_third_placement(random_num)
-  #     end
-  #   else
-  #     increment_tries
-  #     check_random_tries
-  #     y_third_placement(random_num)
-  #   end
-  # end
+  def y_third_placement(row, column)
+    retry_y_third_placement unless selection_empty?(row, column)
+
+    if (row == previous_row) &&
+          (previous_ship_placement('y1')[0] == row)
+      if previous_column - column == -1
+        board[row][column] = 'y3'
+      elsif previous_column - column == 1
+        @board[row][column] = 'y3'
+      else
+        increment_tries
+        check_random_tries
+        y_third_placement(random_num)
+      end
+    elsif (selection[1] == previous_ship_placement('y2')[1]) &&
+          (previous_ship_placement('y1')[1] == selection[1])
+      if previous_row.ord - row.ord == -1
+        board[row][column] = 'y3'
+      elsif previous_row.ord - row.ord == 1
+        board[row][column] = 'y3'
+      else
+        increment_tries
+        check_random_tries
+        y_third_placement(random_num)
+      end
+    else
+      increment_tries
+      check_random_tries
+      y_third_placement(random_num)
+    end
+  end
+
+  def retry_y_third_placement
+    increment_tries
+    check_random_tries
+    y_third_placement(row_column)
+  end
 
   def previous_ship_placement(input)
     board.each do |key, row|
