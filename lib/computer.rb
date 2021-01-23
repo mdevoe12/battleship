@@ -22,6 +22,8 @@ class Computer
 
   def x_first_placement(selection_one)
     board[selection_one[0]][selection_one[1].to_i] = 'x1'
+
+    self.previous_placement = selection_one
   end
 
   def x_second_placement(selection_two)
