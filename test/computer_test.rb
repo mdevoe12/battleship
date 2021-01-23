@@ -6,7 +6,6 @@ class ComputerTest < Minitest::Test
 
   def test_if_create_class_works
     computerplacement = Computer.new
-
   end
 
   def test_if_first_placement_works
