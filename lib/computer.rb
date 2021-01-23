@@ -72,37 +72,35 @@ class Computer
     y_first_placement(random_row, random_column)
   end
 
-  # def y_second_placement(selection)
-  #   if !selection_empty?(selection)
-  #     increment_tries
-  #     check_random_tries
-  #     y_second_placement(random_num)
-  #   elsif selection[0] == previous_ship_placement('y1')[0]
-  #     if previous_ship_placement('y1')[1].to_i - selection[1].to_i == -1
-  #       board[selection[0]][selection[1].to_i] = 'y2'
-  #     elsif previous_ship_placement('y1')[1].to_i - selection[1].to_i == 1
-  #       board[selection[0]][selection[1].to_i] = 'y2'
-  #     else
-  #       increment_tries
-  #       check_random_tries
-  #       y_second_placement(random_num)
-  #     end
-  #   elsif selection[1] == previous_ship_placement('y1')[1]
-  #     if previous_ship_placement('y1')[0].ord - selection[0].ord == -1
-  #       board[selection[0]][selection[1].to_i] = 'y2'
-  #     elsif previous_ship_placement('y1')[0].ord - selection[0].ord == 1
-  #       board[selection[0]][selection[1].to_i] = 'y2'
-  #     else
-  #       increment_tries
-  #       check_random_tries
-  #       y_second_placement(random_num)
-  #     end
-  #   else
-  #     increment_tries
-  #     check_random_tries
-  #     y_second_placement(random_num)
-  #   end
-  # end
+  def y_second_placement(row, column)
+    retry_y_second_placement unless selection_empty?(row, column)
+
+    if row == previous_row
+      if previous_column - column == -1
+        board[row][column] = 'y2'
+      elsif previous_column - column == 1
+        board[row][column] = 'y2'
+      else
+        retry_y_second_placement
+      end
+    elsif column == previous_column
+      if previous_row.ord - row.ord == -1
+        board[row][column] = 'y2'
+      elsif previous_row.ord - row.ord == 1
+        board[row][column] = 'y2'
+      else
+        retry_y_second_placement
+      end
+    else
+      retry_y_second_placement
+    end
+  end
+
+  def retry_y_second_placement
+    increment_tries
+    check_random_tries
+    y_second_placement(random_row, random_column)
+  end
 
   # def y_third_placement(selection)
   #   if !selection_empty?(selection)
