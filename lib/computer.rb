@@ -30,26 +30,21 @@ class Computer
   end
 
   def x_second_placement(row, column)
-    retry_x_second_placement unless selection_empty?(row, column)
+    result = get_result_range(row, column)
 
+    [-1, 1].include?(result) ? set_x_2(row, column) : retry_x_second_placement
+  end
+
+  def get_result_range(row, column)
     if row == previous_row
-      if previous_ship_placement('x1')[1].to_i - column == -1
-        set_x_2(row, column)
-      elsif previous_ship_placement('x1')[1].to_i - column == 1
-        set_x_2(row, column)
-      else
-        retry_x_second_placement
-      end
-    elsif column == previous_ship_placement('x1')[1]
-      if previous_ship_placement('x1')[0].ord - row.ord == -1
-        set_x_2(row, column)
-      elsif previous_ship_placement('x1')[0].ord - row.ord == 1
-        set_x_2(row, column)
-      else
-        retry_x_second_placement
-      end
-    else
-      retry_x_second_placement
+      result = previous_column - column
+    end
+
+    if column == previous_column
+      previous_row_index = ROWS.index(previous_row)
+      row_index = ROWS.index(row)
+
+      result = previous_row_index - row_index
     end
   end
 
@@ -181,7 +176,6 @@ class Computer
   end
 
   def selection_empty?(row, column)
-    # board[selection[0]][selection[1].to_i] == ''
     board[row][column] == ''
   end
 end
