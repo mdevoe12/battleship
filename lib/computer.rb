@@ -20,32 +20,32 @@ class Computer
     y_third_placement(random_num)
   end
 
-  def x_first_placement(selection_one)
-    board[selection_one[0]][selection_one[1].to_i] = 'x1'
+  def x_first_placement(selection)
+    board[selection[0]][selection[1].to_i] = 'x1'
 
-    self.previous_placement = selection_one
+    self.previous_placement = selection
   end
 
-  def x_second_placement(selection_two)
-    if board[selection_two[0]][selection_two[1].to_i] != ''
+  def x_second_placement(selection)
+    if !selection_empty?(selection)
       increment_tries
       check_random_tries
       x_second_placement(random_num)
-    elsif selection_two[0] == previous_placement[0]
-      if previous_ship_placement('x1')[1].to_i - selection_two[1].to_i == -1
-        board[selection_two[0]][selection_two[1].to_i] = 'x2'
-      elsif previous_ship_placement('x1')[1].to_i - selection_two[1].to_i == 1
-        board[selection_two[0]][selection_two[1].to_i] = 'x2'
+    elsif selection[0] == previous_placement[0]
+      if previous_ship_placement('x1')[1].to_i - selection[1].to_i == -1
+        board[selection[0]][selection[1].to_i] = 'x2'
+      elsif previous_ship_placement('x1')[1].to_i - selection[1].to_i == 1
+        board[selection[0]][selection[1].to_i] = 'x2'
       else
         increment_tries
         check_random_tries
         x_second_placement(random_num)
       end
-    elsif selection_two[1] == previous_ship_placement('x1')[1]
-      if previous_ship_placement('x1')[0].ord - selection_two[0].ord == -1
-        board[selection_two[0]][selection_two[1].to_i] = 'x2'
-      elsif previous_ship_placement('x1')[0].ord - selection_two[0].ord == 1
-        board[selection_two[0]][selection_two[1].to_i] = 'x2'
+    elsif selection[1] == previous_ship_placement('x1')[1]
+      if previous_ship_placement('x1')[0].ord - selection[0].ord == -1
+        board[selection[0]][selection[1].to_i] = 'x2'
+      elsif previous_ship_placement('x1')[0].ord - selection[0].ord == 1
+        board[selection[0]][selection[1].to_i] = 'x2'
       else
         increment_tries
         check_random_tries
@@ -58,9 +58,9 @@ class Computer
     end
   end
 
-  def y_first_placement(selection_three)
-    if board[selection_three[0]][selection_three[1].to_i] == ''
-      board[selection_three[0]][selection_three[1].to_i] = 'y1'
+  def y_first_placement(selection)
+    if selection_empty?(selection)
+      board[selection[0]][selection[1].to_i] = 'y1'
     else
       increment_tries
       check_random_tries
@@ -68,26 +68,26 @@ class Computer
     end
   end
 
-  def y_second_placement(selection_four)
-    if board[selection_four[0]][selection_four[1].to_i] != ''
+  def y_second_placement(selection)
+    if !selection_empty?(selection)
       increment_tries
       check_random_tries
       y_second_placement(random_num)
-    elsif selection_four[0] == previous_ship_placement('y1')[0]
-      if previous_ship_placement('y1')[1].to_i - selection_four[1].to_i == -1
-        board[selection_four[0]][selection_four[1].to_i] = 'y2'
-      elsif previous_ship_placement('y1')[1].to_i - selection_four[1].to_i == 1
-        board[selection_four[0]][selection_four[1].to_i] = 'y2'
+    elsif selection[0] == previous_ship_placement('y1')[0]
+      if previous_ship_placement('y1')[1].to_i - selection[1].to_i == -1
+        board[selection[0]][selection[1].to_i] = 'y2'
+      elsif previous_ship_placement('y1')[1].to_i - selection[1].to_i == 1
+        board[selection[0]][selection[1].to_i] = 'y2'
       else
         increment_tries
         check_random_tries
         y_second_placement(random_num)
       end
-    elsif selection_four[1] == previous_ship_placement('y1')[1]
-      if previous_ship_placement('y1')[0].ord - selection_four[0].ord == -1
-        board[selection_four[0]][selection_four[1].to_i] = 'y2'
-      elsif previous_ship_placement('y1')[0].ord - selection_four[0].ord == 1
-        board[selection_four[0]][selection_four[1].to_i] = 'y2'
+    elsif selection[1] == previous_ship_placement('y1')[1]
+      if previous_ship_placement('y1')[0].ord - selection[0].ord == -1
+        board[selection[0]][selection[1].to_i] = 'y2'
+      elsif previous_ship_placement('y1')[0].ord - selection[0].ord == 1
+        board[selection[0]][selection[1].to_i] = 'y2'
       else
         increment_tries
         check_random_tries
@@ -100,28 +100,28 @@ class Computer
     end
   end
 
-  def y_third_placement(selection_five)
-    if board[selection_five[0]][selection_five[1].to_i] != ''
+  def y_third_placement(selection)
+    if !selection_empty?(selection)
       increment_tries
       check_random_tries
       y_third_placement(random_num)
-    elsif (selection_five[0] == previous_ship_placement('y2')[0]) &&
-          (previous_ship_placement('y1')[0] == selection_five[0])
-      if previous_ship_placement('y2')[1].to_i - selection_five[1].to_i == -1
-        board[selection_five[0]][selection_five[1].to_i] = 'y3'
-      elsif previous_ship_placement('y2')[1].to_i - selection_five[1].to_i == 1
-        @board[selection_five[0]][selection_five[1].to_i] = 'y3'
+    elsif (selection[0] == previous_ship_placement('y2')[0]) &&
+          (previous_ship_placement('y1')[0] == selection[0])
+      if previous_ship_placement('y2')[1].to_i - selection[1].to_i == -1
+        board[selection[0]][selection[1].to_i] = 'y3'
+      elsif previous_ship_placement('y2')[1].to_i - selection[1].to_i == 1
+        @board[selection[0]][selection[1].to_i] = 'y3'
       else
         increment_tries
         check_random_tries
         y_third_placement(random_num)
       end
-    elsif (selection_five[1] == previous_ship_placement('y2')[1]) &&
-          (previous_ship_placement('y1')[1] == selection_five[1])
-      if previous_ship_placement('y2')[0].ord - selection_five[0].ord == -1
-        board[selection_five[0]][selection_five[1].to_i] = 'y3'
-      elsif previous_ship_placement('y2')[0].ord - selection_five[0].ord == 1
-        board[selection_five[0]][selection_five[1].to_i] = 'y3'
+    elsif (selection[1] == previous_ship_placement('y2')[1]) &&
+          (previous_ship_placement('y1')[1] == selection[1])
+      if previous_ship_placement('y2')[0].ord - selection[0].ord == -1
+        board[selection[0]][selection[1].to_i] = 'y3'
+      elsif previous_ship_placement('y2')[0].ord - selection[0].ord == 1
+        board[selection[0]][selection[1].to_i] = 'y3'
       else
         increment_tries
         check_random_tries
@@ -165,5 +165,9 @@ class Computer
 
   def increment_tries
     self.random_tries += 1
+  end
+
+  def selection_empty?(selection)
+    board[selection[0]][selection[1].to_i] == ''
   end
 end
