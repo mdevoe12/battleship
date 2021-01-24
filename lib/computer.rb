@@ -23,79 +23,31 @@ class Computer
   end
 
   def x_first_placement(row, column)
-    board[row][column] = 'x1'
-
-    self.previous_row = row
-    self.previous_column = column
+    set_placement(row, column, 'x1')
   end
 
   def x_second_placement(row, column)
     result = get_result_range(row, column)
 
-    [-1, 1].include?(result) ? set_x_2(row, column) : retry_x_second_placement
-  end
-
-  def get_result_range(row, column)
-    if row == previous_row
-      result = previous_column - column
-    end
-
-    if column == previous_column
-      previous_row_index = ROWS.index(previous_row)
-      row_index = ROWS.index(row)
-
-      result = previous_row_index - row_index
-    end
-  end
-
-  def retry_x_second_placement
-    increment_tries
-    check_random_tries
-    x_second_placement(random_row, random_column)
-  end
-
-  def set_x_2(row, column)
-    board[row][column] = 'x2'
+    [-1, 1].include?(result) ? set_placement(row, column, 'x2') : retry_placement(:x_second_placement)
   end
 
   def y_first_placement(row, column)
-    retry_y_first_placement unless selection_empty?(row, column)
+    retry_placement(:y_first_placement) unless selection_empty?(row, column)
 
-    board[row][column] = 'y1'
-    self.previous_row = row
-    self.previous_column = column
-  end
-
-  def retry_y_first_placement
-    increment_tries
-    check_random_tries
-    y_first_placement(random_row, random_column)
+    set_placement(row, column, 'y1')
   end
 
   def y_second_placement(row, column)
-    retry_y_second_placement unless selection_empty?(row, column)
-
     result = get_result_range(row, column)
 
-    [-1, 1].include?(result) ? set_y_2(row, column) : retry_y_second_placement
-  end
-
-  def set_y_2(row, column)
-    board[row][column] = 'y2'
-    self.previous_row = row
-    self.previous_column = column
-  end
-
-  def retry_y_second_placement
-    increment_tries
-    check_random_tries
-    y_second_placement(random_row, random_column)
+    [-1, 1].include?(result) ? set_placement(row, column, 'y2') : retry_placement(:y_second_placement)
   end
 
   def y_third_placement(row, column)
-    retry_y_third_placement unless selection_empty?(row, column)
+    retry_placement(:y_third_placement) unless selection_empty?(row, column)
 
-    if (row == previous_row) &&
+    if row == previous_row &&
           (previous_ship_placement('y1')[0] == row)
       if previous_column - column == -1
         board[row][column] = 'y3'
@@ -106,8 +58,8 @@ class Computer
         check_random_tries
         y_third_placement(random_num)
       end
-    elsif (selection[1] == previous_ship_placement('y2')[1]) &&
-          (previous_ship_placement('y1')[1] == selection[1])
+    elsif (column == previous_ship_placement('y2')[1]) &&
+          (previous_ship_placement('y1')[1] == column)
       if previous_row.ord - row.ord == -1
         board[row][column] = 'y3'
       elsif previous_row.ord - row.ord == 1
@@ -122,12 +74,6 @@ class Computer
       check_random_tries
       y_third_placement(random_num)
     end
-  end
-
-  def retry_y_third_placement
-    increment_tries
-    check_random_tries
-    y_third_placement(row_column)
   end
 
   def previous_ship_placement(input)
@@ -173,5 +119,32 @@ class Computer
 
   def selection_empty?(row, column)
     board[row][column] == ''
+  end
+
+  def set_placement(row, column, marker)
+    board[row][column] = marker
+    self.previous_row = row
+    self.previous_column = column
+  end
+
+  def retry_placement(method)
+    increment_tries
+    check_random_tries
+    self.send(method, random_row, random_column)
+  end
+
+  def get_result_range(row, column)
+    return unless selection_empty?(row, column)
+
+    if row == previous_row
+      result = previous_column - column
+    end
+
+    if column == previous_column
+      previous_row_index = ROWS.index(previous_row)
+      row_index = ROWS.index(row)
+
+      result = previous_row_index - row_index
+    end
   end
 end
