@@ -2,6 +2,7 @@ require './lib/board'
 
 class Computer
   ROWS = %w[a b c d].freeze
+  MARKERS = %w[x1 x2 y1 y2].freeze
 
   attr_accessor :board, :random_tries, :previous_placement, :previous_row, :previous_column
 
@@ -15,64 +16,25 @@ class Computer
 
   def run
     wipe_board
-    x_first_placement(random_row, random_column)
-    x_second_placement(random_row, random_column)
-    y_first_placement(random_row, random_column)
-    y_second_placement(random_row, random_column)
-    # y_third_placement(random_num)
+    MARKERS.each { |marker| try_placement(random_row, random_column, marker) }
+    y_third_placement(random_row, random_column)
   end
 
-  def x_first_placement(row, column)
-    set_placement(row, column, 'x1')
-  end
-
-  def x_second_placement(row, column)
+  def try_placement(row, column, marker)
     result = get_result_range(row, column)
 
-    [-1, 1].include?(result) ? set_placement(row, column, 'x2') : retry_placement(:x_second_placement)
-  end
-
-  def y_first_placement(row, column)
-    retry_placement(:y_first_placement) unless selection_empty?(row, column)
-
-    set_placement(row, column, 'y1')
-  end
-
-  def y_second_placement(row, column)
-    result = get_result_range(row, column)
-
-    [-1, 1].include?(result) ? set_placement(row, column, 'y2') : retry_placement(:y_second_placement)
+    [-1, 1].include?(result) ? set_placement(row, column, marker) : retry_placement(marker)
   end
 
   def y_third_placement(row, column)
     retry_placement(:y_third_placement) unless selection_empty?(row, column)
 
-    if row == previous_row &&
-          (previous_ship_placement('y1')[0] == row)
-      if previous_column - column == -1
-        board[row][column] = 'y3'
-      elsif previous_column - column == 1
-        @board[row][column] = 'y3'
-      else
-        increment_tries
-        check_random_tries
-        y_third_placement(random_num)
-      end
-    elsif (column == previous_ship_placement('y2')[1]) &&
-          (previous_ship_placement('y1')[1] == column)
-      if previous_row.ord - row.ord == -1
-        board[row][column] = 'y3'
-      elsif previous_row.ord - row.ord == 1
-        board[row][column] = 'y3'
-      else
-        increment_tries
-        check_random_tries
-        y_third_placement(random_num)
-      end
-    else
-      increment_tries
-      check_random_tries
-      y_third_placement(random_num)
+    if row == previous_row && previous_ship_placement('y1')[0] == row
+      result = get_result_range(row, column)
+
+      [-1, 1].include?(result) ? set_placement(row, column, 'y3') : retry_placement(:y_third_placement)
+    elsif column == previous_column && previous_ship_placement('y1')[1] == column
+      [-1, 1].include?(result) ? set_placement(row, column, 'y3') : retry_placement(:y_third_placement)
     end
   end
 
@@ -94,12 +56,6 @@ class Computer
 
   def random_column
     rand(1..4)
-  end
-
-  def random_num
-    num_gen = rand(1..4)
-
-    ROWS.sample + num_gen.to_s
   end
 
   def check_random_tries
@@ -127,10 +83,10 @@ class Computer
     self.previous_column = column
   end
 
-  def retry_placement(method)
+  def retry_placement(marker)
     increment_tries
     check_random_tries
-    self.send(method, random_row, random_column)
+    self.send(:try_placement, random_row, random_column, marker)
   end
 
   def get_result_range(row, column)
