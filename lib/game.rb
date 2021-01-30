@@ -18,7 +18,7 @@ class Game
   def call
     output.engage
     computer_player.call
-    human_player.run
+    human_player.call
     request_shot
   end
 

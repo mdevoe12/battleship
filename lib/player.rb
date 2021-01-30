@@ -10,7 +10,7 @@ class Player
     @previous_placement = ""
   end
 
-  def run
+  def call
     first_placement
     second_placement
     third_placement
