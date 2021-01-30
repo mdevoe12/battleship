@@ -21,9 +21,12 @@ class Computer
   end
 
   def try_placement(row, column, marker)
-    result = get_result_range(row, column)
-
-    [-1, 1].include?(result) ? set_placement(row, column, marker) : retry_placement(marker)
+    if marker == 'x1' || 'y1'
+      set_placement(row, column, marker)
+    else
+      result = get_result_range(row, column)
+      [-1, 1].include?(result) ? set_placement(row, column, marker) : retry_placement(marker)
+    end
   end
 
   def y_third_placement(row, column)
