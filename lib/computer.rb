@@ -14,11 +14,13 @@ class Computer
     @random_tries = 0
   end
 
-  def run
+  def call
     wipe_board
     MARKERS.each { |marker| try_placement(random_row, random_column, marker) }
     y_third_placement(random_row, random_column)
   end
+
+  private
 
   def try_placement(row, column, marker)
     if marker == 'x1' || 'y1'
