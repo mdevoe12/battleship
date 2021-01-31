@@ -23,7 +23,7 @@ class Computer
   private
 
   def try_placement(row, column, marker)
-    if marker == 'x1' || 'y1'
+    if marker.include?('1')
       set_placement(row, column, marker)
     else
       result = get_result_range(row, column)
