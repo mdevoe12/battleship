@@ -97,15 +97,13 @@ class Computer
   def get_result_range(row, column)
     return unless selection_empty?(row, column)
 
-    if row == previous_row
-      result = previous_column - column
-    end
+    return previous_column - column if row == previous_row
 
     if column == previous_column
       previous_row_index = ROWS.index(previous_row)
       row_index = ROWS.index(row)
 
-      result = previous_row_index - row_index
+      previous_row_index - row_index
     end
   end
 end
