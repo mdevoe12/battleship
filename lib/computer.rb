@@ -91,7 +91,7 @@ class Computer
   def retry_placement(marker)
     increment_tries
     check_random_tries
-    self.send(:try_placement, random_row, random_column, marker)
+    send(:try_placement, random_row, random_column, marker)
   end
 
   def get_result_range(row, column)
