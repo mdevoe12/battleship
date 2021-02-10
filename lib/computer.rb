@@ -8,7 +8,7 @@ class Computer
 
   def initialize(layout:)
     @board = layout
-    @previous_placement = ''
+    @previous_placement = nil
     @previous_row = nil
     @previous_column = nil
     @random_tries = 0
@@ -79,7 +79,7 @@ class Computer
   end
 
   def selection_empty?(row, column)
-    board[row][column] == ''
+    board[row][column] == nil
   end
 
   def set_placement(row, column, marker)
