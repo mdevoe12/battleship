@@ -7,7 +7,7 @@ class Player
 
   def initialize(layout:)
     @board = layout
-    @previous_placement = ""
+    @previous_placement = nil
   end
 
   def call
@@ -50,7 +50,7 @@ end
         second_placement
     elsif (selection_two[1].to_i < 1) || (selection_two[1].to_i > 4)
       p "Your selection is off the grid, please choose again."
-    elsif @board[selection_two[0]][selection_two[1].to_i] != ""
+    elsif @board[selection_two[0]][selection_two[1].to_i] != nil
         p "That place is already occupied, please select again."
         second_placement
         second_placement
@@ -92,7 +92,7 @@ end
     elsif (selection_three[1].to_i < 1) || (selection_three[1].to_i > 4)
       p "Your selection is off the grid, please choose again."
       third_placement
-    elsif @board[selection_three[0]][selection_three[1].to_i] != ""
+    elsif @board[selection_three[0]][selection_three[1].to_i] != nil
       p "That place is already occupied, please select again."
       third_placement
     else
@@ -109,7 +109,7 @@ end
 
 
   def y_second_placement(selection_four)
-    if @board[selection_four[0]][selection_four[1].to_i] != ""
+    if @board[selection_four[0]][selection_four[1].to_i] != nil
       p "That place is already occupied, please select again."
         fourth_placement
     elsif (selection_four[0].ord > 100) || (selection_four[0].ord < 97)
@@ -150,7 +150,7 @@ end
 
 
   def y_third_placement(selection_five)
-    if @board[selection_five[0]][selection_five[1].to_i] != ""
+    if @board[selection_five[0]][selection_five[1].to_i] != nil
       p "That place is already occupied, please select again."
         fifth_placement
     elsif (selection_five[0].ord > 100) || (selection_five[0].ord < 97)
