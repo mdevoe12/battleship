@@ -10,10 +10,10 @@ class Board
 
   def self.layout
     {
-      "a" => [nil, nil, nil, nil, nil],
-      "b" => [nil, nil, nil, nil, nil],
-      "c" => [nil, nil, nil, nil, nil],
-      "d" => [nil, nil, nil, nil, nil]
+      a: [nil, nil, nil, nil, nil],
+      b: [nil, nil, nil, nil, nil],
+      c: [nil, nil, nil, nil, nil],
+      d: [nil, nil, nil, nil, nil]
     }
   end
 end
