@@ -40,7 +40,7 @@ class Game
     elsif (shot[1].to_i < 1) || (shot[1].to_i > 4)
       output.shot_request_off_grid
       request_shot
-    elsif @computer_player.board[shot[0]][shot[1].to_i] == ''
+    elsif @computer_player.board[shot[0]][shot[1].to_i] == nil
       @computer_player.board[shot[0]][shot[1].to_i] = 'M'
       output.shot_missed
       @shot_counter += 1
@@ -66,7 +66,7 @@ class Game
   end
 
   def computer_check(shot)
-    if    @human_player.board[shot[0]][shot[1].to_i] == ''
+    if    @human_player.board[shot[0]][shot[1].to_i] == nil
       @human_player.board[shot[0]][shot[1].to_i] = 'M'
       output.incoming_shot_missed
     elsif @human_player.board[shot[0]][shot[1].to_i].include?('x') ||
@@ -129,7 +129,7 @@ class Game
   end
 
   def random_num
-    random_number = ''
+    random_number = nil
     num_gen = (1..4)
     letter_gen = ['a', 'b', 'c', 'd']
     random_number = letter_gen.sample + rand(num_gen).to_s
