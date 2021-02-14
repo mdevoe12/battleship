@@ -1,7 +1,7 @@
 require './lib/board'
 
 class Computer
-  ROWS = %w[a b c d].freeze
+  ROWS = %i(a b c d).freeze
   MARKERS = %w[x1 x2 y1 y2].freeze
 
   attr_accessor :board, :random_tries, :previous_placement, :previous_row, :previous_column
