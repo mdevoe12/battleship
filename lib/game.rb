@@ -129,10 +129,9 @@ class Game
   end
 
   def random_num
-    random_number = nil
     num_gen = (1..4)
-    letter_gen = ['a', 'b', 'c', 'd']
-    random_number = letter_gen.sample + rand(num_gen).to_s
+    letter_gen = %w[a b c d]
+    letter_gen.sample + rand(num_gen).to_s
   end
 
   def display_board
