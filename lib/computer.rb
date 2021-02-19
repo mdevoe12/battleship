@@ -1,7 +1,7 @@
 require './lib/board'
 
 class Computer
-  ROWS = %i(a b c d).freeze
+  ROWS = %i[a b c d].freeze
   MARKERS = %w[x1 x2 y1 y2].freeze
 
   attr_accessor :board, :random_tries, :previous_placement, :previous_row, :previous_column
@@ -96,14 +96,12 @@ class Computer
 
   def get_result_range(row, column)
     return unless selection_empty?(row, column)
-
     return previous_column - column if row == previous_row
+    return unless column == previous_column
 
-    if column == previous_column
-      previous_row_index = ROWS.index(previous_row)
-      row_index = ROWS.index(row)
+    previous_row_index = ROWS.index(previous_row)
+    row_index = ROWS.index(row)
 
-      previous_row_index - row_index
-    end
+    previous_row_index - row_index
   end
 end
