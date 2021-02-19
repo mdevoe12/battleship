@@ -1,9 +1,7 @@
 require './lib/board'
 
 class Player
-
-  attr_reader :previous_ship_placement,
-              :board
+  attr_reader :previous_ship_placement, :board
 
   def initialize(layout:)
     @board = layout
